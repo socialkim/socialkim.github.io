@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Kim Dukjin · Digital Business Card</title>
+<meta name="description" content="Kim Dukjin — AI Communicator, Director of IT Communication Research Lab. Bestselling author of AI 2024/2025/2026."/>
+<meta property="og:title" content="Kim Dukjin · IT Communication Research Lab"/>
+<meta property="og:description" content="AI Communicator · Author · Broadcaster · Director"/>
+<meta property="og:type" content="profile"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui' font-size='28' font-weight='800' fill='white'%3EK%3C/text%3E%3C/svg%3E"/>
+
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --bg-2:#13131a;
+    --card:rgba(255,255,255,0.04);
+    --card-border:rgba(255,255,255,0.08);
+    --ink:#ffffff;
+    --ink-2:#c7c9d1;
+    --muted:#8a8d97;
+    --accent:#E4002B;
+    --accent-2:#ff4d6d;
+    --gold:#f5c451;
+    --green:#22c55e;
+    --blue:#3b82f6;
+    --radius:18px;
+    --shadow:0 1px 2px rgba(0,0,0,.2), 0 20px 60px -20px rgba(228,0,43,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Pretendard","Apple SD Gothic Neo","Inter","Noto Sans KR","Segoe UI",system-ui,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(228,0,43,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(59,130,246,.12), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100dvh;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+
+  .wrap{
+    max-width:480px;
+    margin:0 auto;
+    padding:28px 20px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  .lang{
+    display:flex;justify-content:flex-end;gap:6px;
+    margin-bottom:18px;
+  }
+  .lang button{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    color:var(--ink-2);
+    padding:6px 12px;border-radius:999px;
+    font-size:12px;font-weight:600;cursor:pointer;
+    transition:all .2s;
+  }
+  .lang button.on{
+    background:#fff;color:#111;border-color:#fff;
+  }
+
+  /* ---------- Profile Card ---------- */
+  .profile{
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:28px 24px 24px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    position:relative;
+    overflow:hidden;
+  }
+  .profile::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(400px 200px at 50% -20%, rgba(228,0,43,.25), transparent 60%);
+    pointer-events:none;
+  }
+  .avatar{
+    width:96px;height:96px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    background:linear-gradient(135deg, #E4002B, #ff4d6d);
+    display:flex;align-items:center;justify-content:center;
+    font-size:42px;font-weight:800;letter-spacing:-1px;
+    color:#fff;
+    box-shadow:0 12px 36px -8px rgba(228,0,43,.6), inset 0 1px 0 rgba(255,255,255,.25);
+    position:relative;z-index:1;
+  }
+  .name{
+    font-size:28px;font-weight:800;letter-spacing:-.5px;
+    margin:6px 0 2px;position:relative;z-index:1;
+  }
+  .name-kr{
+    font-size:14px;color:var(--ink-2);font-weight:500;
+    position:relative;z-index:1;
+  }
+  .title{
+    margin-top:10px;font-size:14px;color:var(--ink-2);
+    font-weight:500;position:relative;z-index:1;
+  }
+  .title strong{color:#fff;font-weight:700}
+  .badges{
+    display:flex;justify-content:center;flex-wrap:wrap;
+    gap:6px;margin-top:14px;position:relative;z-index:1;
+  }
+  .badge{
+    font-size:11px;font-weight:600;
+    padding:5px 10px;border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    color:var(--ink-2);
+  }
+  .badge.red{background:rgba(228,0,43,.18);border-color:rgba(228,0,43,.35);color:#ffb3c1}
+  .badge.gold{background:rgba(245,196,81,.15);border-color:rgba(245,196,81,.3);color:#f5c451}
+  .badge.blue{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);color:#93c5fd}
+
+  /* ---------- QR Section ---------- */
+  .qr-card{
+    margin-top:18px;
+    background:#fff;
+    border-radius:var(--radius);
+    padding:22px 22px 18px;
+    text-align:center;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.5);
+  }
+  .qr-label{
+    font-size:11px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;color:#6b7280;margin-bottom:10px;
+  }
+  #qr{display:flex;justify-content:center;margin-bottom:10px}
+  #qr canvas, #qr img{
+    border-radius:10px;display:block;
+  }
+  .qr-hint{
+    font-size:12px;color:#6b7280;font-weight:500;
+  }
+  .qr-hint strong{color:#111}
+
+  /* ---------- Action Buttons ---------- */
+  .actions{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px;
+    margin-top:18px;
+  }
+  .actions .full{grid-column:1/-1}
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 14px;border-radius:14px;
+    font-size:14px;font-weight:600;
+    cursor:pointer;border:1px solid var(--card-border);
+    background:rgba(255,255,255,.05);color:#fff;
+    transition:all .2s ease;
+    text-decoration:none;
+  }
+  .btn:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn.primary{
+    background:linear-gradient(135deg, #E4002B, #ff4d6d);
+    border-color:transparent;
+    box-shadow:0 8px 24px -10px rgba(228,0,43,.7);
+  }
+  .btn.primary:hover{filter:brightness(1.1)}
+  .btn svg{width:18px;height:18px;flex-shrink:0}
+
+  /* ---------- Info Section ---------- */
+  .section{
+    margin-top:24px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:20px;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+  }
+  .section h3{
+    font-size:11px;font-weight:700;letter-spacing:1.2px;
+    text-transform:uppercase;color:var(--muted);
+    margin:0 0 14px;
+  }
+  .info-row{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:8px 0;
+    font-size:14px;
+  }
+  .info-row + .info-row{border-top:1px solid var(--card-border)}
+  .info-icon{
+    width:32px;height:32px;flex-shrink:0;
+    border-radius:8px;
+    background:rgba(255,255,255,.06);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-2);
+  }
+  .info-icon svg{width:16px;height:16px}
+  .info-body{flex:1;min-width:0;padding-top:5px}
+  .info-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .info-value{font-size:14px;color:var(--ink);font-weight:500;margin-top:1px;word-break:break-all}
+  .info-value a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.25)}
+
+  /* ---------- About ---------- */
+  .about p{
+    margin:0 0 10px;color:var(--ink-2);font-size:14px;line-height:1.7;
+  }
+  .about p:last-child{margin-bottom:0}
+
+  /* ---------- Books ---------- */
+  .books{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+  }
+  .book{
+    aspect-ratio:2/3;
+    border-radius:8px;
+    background:linear-gradient(160deg, #1f2937, #374151);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:#fff;text-align:center;padding:6px;
+    font-size:10px;font-weight:700;
+    box-shadow:0 6px 14px -6px rgba(0,0,0,.5);
+    position:relative;overflow:hidden;
+  }
+  .book::before{
+    content:"";position:absolute;left:6px;top:0;bottom:0;width:3px;
+    background:rgba(255,255,255,.12);
+  }
+  .book .yr{font-size:18px;font-weight:900;letter-spacing:-.5px;margin-top:4px}
+  .book.b1{background:linear-gradient(160deg,#1e3a8a,#3b82f6)}
+  .book.b2{background:linear-gradient(160deg,#065f46,#10b981)}
+  .book.b3{background:linear-gradient(160deg,#7c2d12,#f97316)}
+  .book.b4{background:linear-gradient(160deg,#831843,#E4002B);outline:2px solid #fff3}
+
+  /* ---------- Footer ---------- */
+  .footer{
+    text-align:center;margin-top:28px;
+    color:var(--muted);font-size:11px;
+  }
+  .footer a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+
+  /* ---------- Toast ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);
+    background:#fff;color:#111;padding:10px 18px;border-radius:999px;
+    font-size:13px;font-weight:600;
+    box-shadow:0 12px 30px -8px rgba(0,0,0,.4);
+    opacity:0;pointer-events:none;transition:all .25s;
+    z-index:1000;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* small screens */
+  @media (max-width:380px){
+    .name{font-size:24px}
+    .avatar{width:84px;height:84px;font-size:36px}
+  }
+  /* hidden by lang */
+  [data-lang="ko"] .en{display:none}
+  [data-lang="en"] .ko{display:none}
+</style>
+</head>
+<body data-lang="en">
+
+<div class="wrap">
+
+  <!-- Lang toggle -->
+  <div class="lang">
+    <button data-l="en" class="on">EN</button>
+    <button data-l="ko">한국어</button>
+  </div>
+
+  <!-- Profile -->
+  <section class="profile">
+    <div class="avatar">K</div>
+    <div class="name">Kim Dukjin</div>
+    <div class="name-kr">김덕진</div>
+    <div class="title">
+      <span class="en"><strong>Director / CEO</strong> · IT Communication Research Lab</span>
+      <span class="ko"><strong>대표이사 / 소장</strong> · 아이티커뮤니케이션연구소</span>
+    </div>
+    <div class="badges">
+      <span class="badge red">AI Communicator</span>
+      <span class="badge gold">Bestselling Author</span>
+      <span class="badge blue">Broadcaster</span>
+    </div>
+  </section>
+
+  <!-- QR Code -->
+  <section class="qr-card">
+    <div class="qr-label">
+      <span class="en">Scan to save contact</span>
+      <span class="ko">QR을 찍어 연락처 저장</span>
+    </div>
+    <div id="qr"></div>
+    <div class="qr-hint">
+      <span class="en">Open your camera and point at the code</span>
+      <span class="ko">카메라 앱으로 QR을 스캔하세요</span>
+    </div>
+  </section>
+
+  <!-- Action buttons -->
+  <div class="actions">
+    <a href="#" id="vcfBtn" class="btn primary full">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      <span class="en">Save to Contacts</span>
+      <span class="ko">연락처에 저장</span>
+    </a>
+    <a href="mailto:socialkim0211@gmail.com" class="btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </a>
+    <a href="tel:+82269533379" class="btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+    <button id="copyEmail" class="btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="en">Copy Email</span>
+      <span class="ko">이메일 복사</span>
+    </button>
+    <a href="https://socialkim.github.io" class="btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="en">Website</span>
+      <span class="ko">웹사이트</span>
+    </a>
+  </div>
+
+  <!-- Contact info -->
+  <section class="section">
+    <h3>
+      <span class="en">Contact</span>
+      <span class="ko">연락처</span>
+    </h3>
+
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div class="info-body">
+        <div class="info-label">Email</div>
+        <div class="info-value"><a href="mailto:socialkim0211@gmail.com">socialkim0211@gmail.com</a></div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <div class="info-body">
+        <div class="info-label">
+          <span class="en">Office</span>
+          <span class="ko">사무실</span>
+        </div>
+        <div class="info-value"><a href="tel:+82269533379">+82 2-6953-3379</a></div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="info-body">
+        <div class="info-label">Website</div>
+        <div class="info-value"><a href="https://socialkim.github.io" target="_blank" rel="noopener">socialkim.github.io</a></div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="info-body">
+        <div class="info-label">
+          <span class="en">Office Address</span>
+          <span class="ko">사무실 주소</span>
+        </div>
+        <div class="info-value">
+          <span class="en">1205, 12F, EAN Sangam 2, 190 World Cup-ro,<br/>Mapo-gu, Seoul, Republic of Korea</span>
+          <span class="ko">서울특별시 마포구 월드컵로 190,<br/>이안상암2 12층 1205호</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about">
+    <h3>
+      <span class="en">About</span>
+      <span class="ko">소개</span>
+    </h3>
+    <div class="en">
+      <p><strong style="color:#fff">"Translator of Technology."</strong> For 15 years, I've made cutting-edge AI accessible to executives, public officials, and everyday viewers across Korea.</p>
+      <p>Director of <strong style="color:#fff">IT Communication Research Lab (ITCL)</strong>, a Seoul-based consultancy on AI strategy and corporate transformation.</p>
+      <p>Bestselling author of the <strong style="color:#fff">AI 2024 / 2025 / 2026</strong> book series (Smartbooks). <em>AI 2027</em> in progress. Co-author of <em>Physical AI 2026</em>.</p>
+      <p>Regular guest on <strong style="color:#fff">KBS</strong>, <strong style="color:#fff">MBC</strong>, and major Korean broadcasters — explaining AI to the public since 2010.</p>
+    </div>
+    <div class="ko">
+      <p><strong style="color:#fff">"기술의 번역자."</strong> 15년 동안 복잡한 AI 기술을 기업 임원·공공기관·일반 시청자에게 비유와 스토리로 풀어 설명해왔습니다.</p>
+      <p>IT커뮤니케이션연구소(ITCL) 소장. AI 전략과 기업 디지털 전환 컨설팅을 수행합니다.</p>
+      <p>베스트셀러 <strong style="color:#fff">AI 2024 / 2025 / 2026</strong> 시리즈(스마트북스) 저자. <em>AI 2027</em> 집필 중. <em>피지컬 AI 2026</em> 공저.</p>
+      <p>KBS, MBC 등 주요 방송사 AI 패널로 출연 — 2010년부터 대중에게 AI를 알려왔습니다.</p>
+    </div>
+  </section>
+
+  <!-- Books -->
+  <section class="section">
+    <h3>
+      <span class="en">Selected Books</span>
+      <span class="ko">대표 저서</span>
+    </h3>
+    <div class="books">
+      <div class="book b1">AI<div class="yr">2024</div></div>
+      <div class="book b2">AI<div class="yr">2025</div></div>
+      <div class="book b3">AI<div class="yr">2026</div></div>
+      <div class="book b4">AI<div class="yr">2027</div></div>
+    </div>
+    <p style="margin:14px 0 0;font-size:12px;color:var(--muted);text-align:center">
+      <span class="en">Smartbooks · 2023 – 2026 · AI 2027 in progress</span>
+      <span class="ko">스마트북스 · 2023 – 2026 · AI 2027 집필 중</span>
+    </p>
+  </section>
+
+  <div class="footer">
+    <span class="en">© 2026 Kim Dukjin · IT Communication Research Lab<br/>Met at <strong>Google I/O</strong>? Great to connect.</span>
+    <span class="ko">© 2026 김덕진 · IT커뮤니케이션연구소<br/><strong>Google I/O</strong>에서 뵙게 되어 반갑습니다.</span>
+  </div>
+
+</div>
+
+<div id="toast" class="toast">Copied</div>
+
+<!-- QR Code lib -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+(function(){
+  // ----- vCard -----
+  const vcard = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "N:Kim;Dukjin;;;",
+    "FN:Kim Dukjin",
+    "ORG:IT Communication Research Lab",
+    "TITLE:Director / CEO",
+    "TEL;TYPE=WORK,VOICE:+82-2-6953-3379",
+    "EMAIL;TYPE=WORK:socialkim0211@gmail.com",
+    "URL:https://socialkim.github.io",
+    "ADR;TYPE=WORK:;;190 World Cup-ro Mapo-gu EAN Sangam 2 12F 1205;Seoul;;;Republic of Korea",
+    "NOTE:AI Communicator. Author of AI 2024/2025/2026 (Smartbooks). Regular AI commentator on KBS and MBC.",
+    "END:VCARD"
+  ].join("\r\n");
+
+  // ----- Generate QR -----
+  function makeQR(){
+    const qr = qrcode(0, "M");
+    qr.addData(vcard);
+    qr.make();
+    const size = Math.min(220, Math.floor(window.innerWidth * 0.55));
+    const cell = Math.max(4, Math.floor(size / qr.getModuleCount()));
+    document.getElementById("qr").innerHTML = qr.createImgTag(cell, 8);
+    const img = document.querySelector("#qr img");
+    if(img){ img.style.width = (cell * qr.getModuleCount() + 16) + "px"; img.style.height = "auto"; img.alt = "vCard QR — Kim Dukjin"; }
+  }
+  makeQR();
+  window.addEventListener("resize", makeQR);
+
+  // ----- vCard download -----
+  document.getElementById("vcfBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "Kim-Dukjin.vcf";
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast(document.body.dataset.lang === "ko" ? "연락처 파일을 다운로드합니다" : "Downloading contact…");
+  });
+
+  // ----- Copy email -----
+  document.getElementById("copyEmail").addEventListener("click", function(){
+    navigator.clipboard.writeText("socialkim0211@gmail.com").then(() => {
+      toast(document.body.dataset.lang === "ko" ? "이메일 주소가 복사되었습니다" : "Email copied");
+    }).catch(() => {
+      toast("socialkim0211@gmail.com");
+    });
+  });
+
+  // ----- Toast -----
+  let toastTimer;
+  function toast(msg){
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 1800);
+  }
+
+  // ----- Language toggle -----
+  document.querySelectorAll(".lang button").forEach(b => {
+    b.addEventListener("click", () => {
+      const l = b.dataset.l;
+      document.body.dataset.lang = l;
+      document.querySelectorAll(".lang button").forEach(x => x.classList.toggle("on", x.dataset.l === l));
+      document.documentElement.lang = l;
+    });
+  });
+
+  // Auto-set Korean if browser is Korean
+  if((navigator.language || "").toLowerCase().startsWith("ko")){
+    document.querySelector('.lang button[data-l="ko"]').click();
+  }
+})();
+</script>
+</body>
+</html>
