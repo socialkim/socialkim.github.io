@@ -1,0 +1,1 @@
+import{S as e,x as t}from"./three-0-C9eRgf-J.js";import{a as n}from"./three-11-CGvhcpkE.js";var r=class extends n{constructor(n,r,i){super(n,i),this.isHemisphereLight=!0,this.type=`HemisphereLight`,this.position.copy(e.DEFAULT_UP),this.updateMatrix(),this.groundColor=new t(r)}copy(e,t){return super.copy(e,t),this.groundColor.copy(e.groundColor),this}};export{r as t};
