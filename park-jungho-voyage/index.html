@@ -24,8 +24,93 @@
     <link rel="modulepreload" crossorigin href="/park-jungho-voyage/assets/three-7-BI49nD7N.js">
     <link rel="modulepreload" crossorigin href="/park-jungho-voyage/assets/three-9-yl2kmrvt.js">
     <link rel="stylesheet" crossorigin href="/park-jungho-voyage/assets/index-CpIRhMB2.css">
+    <style>
+      .promo-dock {
+        position: fixed;
+        right: 28px;
+        bottom: 3px;
+        z-index: 40;
+        display: flex;
+        gap: 6px;
+        font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      }
+
+      .promo-link {
+        display: inline-flex;
+        height: 22px;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 0 11px;
+        border: 1px solid rgba(255, 255, 255, 0.48);
+        border-radius: 999px;
+        color: #fff;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba(0, 20, 32, 0.3);
+        transition: transform 0.16s ease, filter 0.16s ease;
+      }
+
+      .promo-link:hover {
+        filter: brightness(1.08);
+        transform: translateY(-2px);
+      }
+
+      .promo-link:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+
+      .promo-link.youtube {
+        background: #e62117;
+      }
+
+      .promo-link.profile {
+        border-color: rgba(255, 255, 255, 0.7);
+        color: #062842;
+        background: #ffd24d;
+      }
+
+      @media (max-width: 900px) {
+        .promo-dock {
+          right: 12px;
+          left: 12px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .promo-link {
+          width: 100%;
+          padding: 0 8px;
+          font-size: 8px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <nav class="promo-dock" aria-label="손에 잡히는 경제 관련 링크">
+      <a
+        class="promo-link youtube"
+        href="https://www.youtube.com/@%EC%86%90%EA%B2%BD%EC%A0%9C"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="손경제 유튜브 새 창에서 열기"
+      >
+        <span aria-hidden="true">▶</span> 손경제 유튜브 바로가기
+      </a>
+      <a
+        class="promo-link profile"
+        href="https://litt.ly/kimdukjin"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="김덕진 소장 소개 새 창에서 열기"
+      >
+        <span aria-hidden="true">●</span> 김덕진 소장 소개
+      </a>
+    </nav>
   </body>
 </html>
