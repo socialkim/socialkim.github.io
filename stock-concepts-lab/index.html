@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="ko" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>주식투자 핵심 개념 인터랙티브 학습실</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --main-surface-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-visualize-standalone] {
+  background-color: var(--background) !important;
+}
+
+/* Generic mobile code-block hosts provide light/dark mode but no series palette.
+   AppBlock hosts set all six variables themselves. */
+:root:not([data-app-block-surface]) {
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(#f3883b, #f59a56);
+  --viz-series-3: light-dark(#5dc977, #74d58b);
+  --viz-series-4: light-dark(#eb77b1, #f08fc0);
+  --viz-series-5: light-dark(#9b79ec, #aa91ef);
+  --viz-series-6: light-dark(#3ab9b1, #5acbc2);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface]) > body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-legend,
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+</style>
+</head>
+<body>
+<section id="stock-concepts-lab">
+  <style>
+    #stock-concepts-lab {
+      color: var(--foreground);
+      background: transparent;
+      width: 100%;
+    }
+    #stock-concepts-lab * { box-sizing: border-box; }
+    #stock-concepts-lab .scl-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    #stock-concepts-lab .scl-promo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 70%, transparent);
+      color: var(--accent-foreground);
+    }
+    #stock-concepts-lab .scl-promo-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+    #stock-concepts-lab .scl-promo-copy strong {
+      color: var(--foreground);
+      font-weight: 500;
+    }
+    #stock-concepts-lab .scl-promo-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    #stock-concepts-lab .scl-panel[hidden] { display: none; }
+    #stock-concepts-lab .scl-panel { min-width: 0; }
+    #stock-concepts-lab .scl-section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    #stock-concepts-lab .scl-section-head h2,
+    #stock-concepts-lab .scl-section-head p { margin: 0; }
+    #stock-concepts-lab .scl-kicker {
+      color: var(--muted-foreground);
+      margin-top: 4px;
+    }
+    #stock-concepts-lab .scl-controls {
+      margin-bottom: 14px;
+      align-items: end;
+    }
+    #stock-concepts-lab .scl-control {
+      flex: 1 1 190px;
+      min-width: 0;
+    }
+    #stock-concepts-lab .scl-control-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    #stock-concepts-lab .scl-value {
+      color: var(--foreground);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    #stock-concepts-lab .scl-stats { margin-bottom: 14px; }
+    #stock-concepts-lab .scl-chart-wrap {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      margin-top: 8px;
+    }
+    #stock-concepts-lab .scl-chart {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+    #stock-concepts-lab .scl-chart .axis,
+    #stock-concepts-lab .scl-chart .grid {
+      stroke: var(--border);
+      stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+    }
+    #stock-concepts-lab .scl-chart .grid { opacity: .7; }
+    #stock-concepts-lab .scl-chart text {
+      fill: var(--muted-foreground);
+      font-family: inherit;
+      font-weight: 400;
+    }
+    #stock-concepts-lab .scl-chart .label-strong {
+      fill: var(--foreground);
+      font-weight: 500;
+    }
+    #stock-concepts-lab .scl-line-a,
+    #stock-concepts-lab .scl-line-b,
+    #stock-concepts-lab .scl-line-c {
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+    #stock-concepts-lab .scl-line-a { stroke: var(--viz-series-1); }
+    #stock-concepts-lab .scl-line-b { stroke: var(--viz-series-2); }
+    #stock-concepts-lab .scl-line-c { stroke: var(--viz-series-3); }
+    #stock-concepts-lab .scl-dot-a { fill: var(--viz-series-1); }
+    #stock-concepts-lab .scl-dot-b { fill: var(--viz-series-2); }
+    #stock-concepts-lab .scl-dot-c { fill: var(--viz-series-3); }
+    #stock-concepts-lab .scl-swatch-a,
+    #stock-concepts-lab .scl-swatch-b,
+    #stock-concepts-lab .scl-swatch-c {
+      width: 22px;
+      height: 3px;
+      display: inline-block;
+      border-radius: 999px;
+    }
+    #stock-concepts-lab .scl-swatch-a { background: var(--viz-series-1); }
+    #stock-concepts-lab .scl-swatch-b { background: var(--viz-series-2); }
+    #stock-concepts-lab .scl-swatch-c { background: var(--viz-series-3); }
+    #stock-concepts-lab .scl-legend { margin-top: 8px; gap: 14px; }
+    #stock-concepts-lab .scl-legend > span { gap: 6px; }
+    #stock-concepts-lab .scl-weight-bar {
+      display: flex;
+      width: 100%;
+      height: 34px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin: 6px 0 12px;
+      background: var(--muted);
+    }
+    #stock-concepts-lab .scl-weight-stock,
+    #stock-concepts-lab .scl-weight-bond {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      color: var(--foreground);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    #stock-concepts-lab .scl-weight-stock { background: color-mix(in srgb, var(--viz-series-1) 24%, transparent); }
+    #stock-concepts-lab .scl-weight-bond { background: color-mix(in srgb, var(--viz-series-2) 24%, transparent); }
+    #stock-concepts-lab .scl-valuation-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 18px;
+      align-items: start;
+    }
+    #stock-concepts-lab .scl-formula {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1.25fr;
+      align-items: center;
+      gap: 7px;
+      margin: 4px 0 14px;
+    }
+    #stock-concepts-lab .scl-formula .card {
+      text-align: center;
+      min-width: 0;
+    }
+    #stock-concepts-lab .scl-formula .viz-stat-value {
+      overflow-wrap: anywhere;
+    }
+    #stock-concepts-lab .scl-table-wrap { min-width: 0; }
+    #stock-concepts-lab .scl-table-wrap h3 { margin: 0 0 8px; }
+    #stock-concepts-lab .scl-matrix {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 4px;
+      table-layout: fixed;
+      font-variant-numeric: tabular-nums;
+    }
+    #stock-concepts-lab .scl-matrix th {
+      color: var(--muted-foreground);
+      font-weight: 400;
+      text-align: center;
+      padding: 3px;
+    }
+    #stock-concepts-lab .scl-matrix td { text-align: center; padding: 0; }
+    #stock-concepts-lab .scl-matrix .btn { width: 100%; }
+    #stock-concepts-lab .scl-note {
+      margin-top: 14px;
+      color: var(--muted-foreground);
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    @media (max-width: 560px) {
+      #stock-concepts-lab .scl-tabs .btn { flex: 1 1 100%; }
+      #stock-concepts-lab .scl-promo-actions,
+      #stock-concepts-lab .scl-promo-actions .btn { width: 100%; }
+      #stock-concepts-lab .scl-valuation-grid { grid-template-columns: 1fr; }
+      #stock-concepts-lab .scl-formula { grid-template-columns: 1fr; }
+      #stock-concepts-lab .scl-formula .scl-op { text-align: center; }
+      #stock-concepts-lab .scl-matrix { border-spacing: 2px; }
+    }
+    @media (max-width: 440px) {
+      #stock-concepts-lab .scl-chart text { display: none; }
+    }
+  </style>
+
+  <nav class="scl-tabs" role="tablist" aria-label="주식투자 개념 선택">
+    <button type="button" class="btn btn-primary" id="scl-tab-1" role="tab" aria-selected="true" aria-controls="scl-panel-1" data-panel="1">1. 변동성 드래그</button>
+    <button type="button" class="btn" id="scl-tab-2" role="tab" aria-selected="false" aria-controls="scl-panel-2" data-panel="2">2. 분산과 상관관계</button>
+    <button type="button" class="btn" id="scl-tab-3" role="tab" aria-selected="false" aria-controls="scl-panel-3" data-panel="3">3. PER와 기대</button>
+  </nav>
+
+  <aside class="scl-promo" aria-label="관련 콘텐츠 바로가기">
+    <div class="scl-promo-copy">
+      <strong>경제와 AI 이야기를 더 쉽고 재미있게 만나보세요</strong>
+      <span class="text-small">손에 잡히는 경제 유튜브와 IT커뮤니케이션연구소 김덕진 소장 소개</span>
+    </div>
+    <div class="scl-promo-actions">
+      <a class="btn btn-primary" href="https://www.youtube.com/@%EC%86%90%EA%B2%BD%EC%A0%9C" target="_blank" rel="noopener noreferrer">손경제 유튜브 바로가기</a>
+      <a class="btn" href="https://litt.ly/kimdukjin" target="_blank" rel="noopener noreferrer">김덕진 소장 소개</a>
+    </div>
+  </aside>
+
+  <section class="scl-panel" id="scl-panel-1" role="tabpanel" aria-labelledby="scl-tab-1">
+    <div class="scl-section-head">
+      <div>
+        <h2>평균이 0%인데도 왜 손실이 날까?</h2>
+        <p class="scl-kicker">수익과 손실은 같은 크기라도 원금에 미치는 힘이 다릅니다.</p>
+      </div>
+      <div class="viz-row" aria-label="변동성 예시 선택">
+        <button type="button" class="btn scl-preset" data-up="10" data-down="10">±10%</button>
+        <button type="button" class="btn scl-preset" data-up="20" data-down="20">±20%</button>
+        <button type="button" class="btn scl-preset" data-up="40" data-down="40">±40%</button>
+      </div>
+    </div>
+    <div class="viz-controls scl-controls">
+      <label class="form-label scl-control" for="scl-up">
+        <span class="scl-control-line"><span>상승률</span><output class="scl-value" id="scl-up-out">20%</output></span>
+        <input class="form-range" id="scl-up" type="range" min="0" max="60" step="1" value="20">
+      </label>
+      <label class="form-label scl-control" for="scl-down">
+        <span class="scl-control-line"><span>하락률</span><output class="scl-value" id="scl-down-out">20%</output></span>
+        <input class="form-range" id="scl-down" type="range" min="0" max="60" step="1" value="20">
+      </label>
+      <label class="form-label scl-control" for="scl-cycles">
+        <span class="scl-control-line"><span>상승·하락 반복</span><output class="scl-value" id="scl-cycles-out">5회</output></span>
+        <input class="form-range" id="scl-cycles" type="range" min="1" max="10" step="1" value="5">
+      </label>
+    </div>
+    <div class="viz-grid scl-stats">
+      <div class="card viz-stat"><span class="text-muted">기간당 산술평균</span><strong class="viz-stat-value" id="scl-arith">0.0%</strong><span class="text-small" id="scl-arith-note">겉으로 보이는 평균</span></div>
+      <div class="card viz-stat"><span class="text-muted">기간당 복리수익률</span><strong class="viz-stat-value" id="scl-geo">−2.0%</strong><span class="text-small">실제 자산의 성장 속도</span></div>
+      <div class="card viz-stat"><span class="text-muted">최종 자산</span><strong class="viz-stat-value" id="scl-final">₩8,153,727</strong><span class="text-small" id="scl-loss-note">원금 대비 −18.5%</span></div>
+    </div>
+    <div class="scl-chart-wrap">
+      <svg class="scl-chart" id="scl-drag-chart" viewBox="0 0 720 300" role="img" aria-labelledby="scl-drag-title scl-drag-desc">
+        <title id="scl-drag-title">변동성 드래그에 따른 자산 변화</title>
+        <desc id="scl-drag-desc">상승과 하락을 반복한 실제 복리 자산과 산술평균을 적용한 가상 자산을 비교합니다.</desc>
+        <g id="scl-drag-grid"></g>
+        <polyline id="scl-drag-avg" class="scl-line-b" points=""></polyline>
+        <polyline id="scl-drag-real" class="scl-line-a" points=""></polyline>
+        <circle id="scl-drag-real-dot" class="scl-dot-a" r="5"></circle>
+        <circle id="scl-drag-avg-dot" class="scl-dot-b" r="5"></circle>
+        <text id="scl-drag-real-label" class="label-strong" text-anchor="end"></text>
+        <text id="scl-drag-avg-label" class="label-strong" text-anchor="end"></text>
+      </svg>
+    </div>
+    <div class="viz-legend scl-legend" aria-label="그래프 범례">
+      <span><i class="scl-swatch-a" aria-hidden="true"></i>실제 복리 자산</span>
+      <span><i class="scl-swatch-b" aria-hidden="true"></i>산술평균을 적용한 가상 자산</span>
+    </div>
+  </section>
+
+  <section class="scl-panel" id="scl-panel-2" role="tabpanel" aria-labelledby="scl-tab-2" hidden>
+    <div class="scl-section-head">
+      <div>
+        <h2>위험한 자산 둘을 섞으면 왜 덜 위험해질까?</h2>
+        <p class="scl-kicker">분산의 핵심은 종목 수보다 서로 다른 방향으로 움직이는 정도입니다.</p>
+      </div>
+    </div>
+    <div class="viz-controls scl-controls">
+      <label class="form-label scl-control" for="scl-weight">
+        <span class="scl-control-line"><span>주식 비중</span><output class="scl-value" id="scl-weight-out">60%</output></span>
+        <input class="form-range" id="scl-weight" type="range" min="0" max="100" step="5" value="60">
+      </label>
+      <label class="form-label scl-control" for="scl-corr">
+        <span class="scl-control-line"><span>상관계수</span><output class="scl-value" id="scl-corr-out">+0.20</output></span>
+        <input class="form-range" id="scl-corr" type="range" min="-1" max="1" step="0.1" value="0.2">
+      </label>
+    </div>
+    <div class="scl-weight-bar" aria-label="포트폴리오 자산 비중">
+      <div class="scl-weight-stock" id="scl-stock-bar" style="width:60%">주식 60%</div>
+      <div class="scl-weight-bond" id="scl-bond-bar" style="width:40%">채권 40%</div>
+    </div>
+    <div class="viz-grid scl-stats">
+      <div class="card viz-stat"><span class="text-muted">기대수익률</span><strong class="viz-stat-value" id="scl-port-return">6.4%</strong><span class="text-small">주식 8% · 채권 4% 가정</span></div>
+      <div class="card viz-stat"><span class="text-muted">포트폴리오 변동성</span><strong class="viz-stat-value" id="scl-port-vol">19.5%</strong><span class="text-small">주식 30% · 채권 12% 가정</span></div>
+      <div class="card viz-stat"><span class="text-muted">분산으로 줄인 변동성</span><strong class="viz-stat-value" id="scl-div-benefit">3.3%p</strong><span class="text-small" id="scl-corr-note">파도가 일부 상쇄됩니다</span></div>
+    </div>
+    <div class="scl-chart-wrap">
+      <svg class="scl-chart" id="scl-wave-chart" viewBox="0 0 720 300" role="img" aria-labelledby="scl-wave-title scl-wave-desc">
+        <title id="scl-wave-title">상관관계에 따른 자산과 포트폴리오의 움직임</title>
+        <desc id="scl-wave-desc">주식, 채권, 혼합 포트폴리오의 상대적인 변동 파형을 비교합니다.</desc>
+        <g id="scl-wave-grid"></g>
+        <polyline id="scl-wave-stock" class="scl-line-a" points=""></polyline>
+        <polyline id="scl-wave-bond" class="scl-line-b" points=""></polyline>
+        <polyline id="scl-wave-port" class="scl-line-c" points=""></polyline>
+        <text x="62" y="24" class="label-strong">상대 변동</text>
+        <text x="676" y="286" text-anchor="end">시간 →</text>
+      </svg>
+    </div>
+    <div class="viz-legend scl-legend" aria-label="파형 범례">
+      <span><i class="scl-swatch-a" aria-hidden="true"></i>주식</span>
+      <span><i class="scl-swatch-b" aria-hidden="true"></i>채권</span>
+      <span><i class="scl-swatch-c" aria-hidden="true"></i>혼합 포트폴리오</span>
+    </div>
+  </section>
+
+  <section class="scl-panel" id="scl-panel-3" role="tabpanel" aria-labelledby="scl-tab-3" hidden>
+    <div class="scl-section-head">
+      <div>
+        <h2>실적이 좋아졌는데도 왜 주가는 떨어질까?</h2>
+        <p class="scl-kicker">주가는 이익뿐 아니라 시장이 붙여주는 기대 배수에도 움직입니다.</p>
+      </div>
+    </div>
+    <div class="viz-controls scl-controls">
+      <label class="form-label scl-control" for="scl-eps">
+        <span class="scl-control-line"><span>주당순이익(EPS)</span><output class="scl-value" id="scl-eps-out">₩6,000</output></span>
+        <input class="form-range" id="scl-eps" type="range" min="2000" max="10000" step="2000" value="6000">
+      </label>
+      <label class="form-label scl-control" for="scl-pe">
+        <span class="scl-control-line"><span>기대 배수(PER)</span><output class="scl-value" id="scl-pe-out">20배</output></span>
+        <input class="form-range" id="scl-pe" type="range" min="10" max="30" step="5" value="20">
+      </label>
+    </div>
+    <div class="scl-formula" aria-label="주가 계산식">
+      <div class="card viz-stat"><span class="text-muted">EPS</span><strong class="viz-stat-value" id="scl-formula-eps">₩6,000</strong></div>
+      <span class="scl-op" aria-hidden="true">×</span>
+      <div class="card viz-stat"><span class="text-muted">PER</span><strong class="viz-stat-value" id="scl-formula-pe">20배</strong></div>
+      <span class="scl-op" aria-hidden="true">=</span>
+      <div class="card viz-stat"><span class="text-muted">이론 주가</span><strong class="viz-stat-value" id="scl-price">₩120,000</strong></div>
+    </div>
+    <div class="scl-valuation-grid">
+      <div>
+        <h3>기준 주가에서 무엇이 바뀌었나</h3>
+        <svg class="scl-chart" id="scl-waterfall" viewBox="0 0 320 270" role="img" aria-labelledby="scl-waterfall-title scl-waterfall-desc">
+          <title id="scl-waterfall-title">EPS와 PER 변화에 따른 주가 연결</title>
+          <desc id="scl-waterfall-desc">기준 주가, EPS 반영 주가, PER까지 반영한 이론 주가를 비교합니다.</desc>
+          <g id="scl-waterfall-bars"></g>
+        </svg>
+      </div>
+      <div class="scl-table-wrap">
+        <h3>EPS × PER 민감도표 <span class="text-small text-muted">(단위: 천 원)</span></h3>
+        <table class="scl-matrix text-small" aria-label="EPS와 PER 조합별 이론 주가">
+          <thead id="scl-matrix-head"></thead>
+          <tbody id="scl-matrix-body"></tbody>
+        </table>
+        <p class="text-small text-muted">셀을 누르면 해당 조합이 적용됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="scl-note text-small">수치는 개념 학습을 위한 단순화된 예시이며, 실제 투자 판단이나 종목 추천이 아닙니다.</p>
+
+  <script>
+    (function () {
+      var root = document.getElementById("stock-concepts-lab");
+      if (!root) return;
+
+      var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var won = new Intl.NumberFormat("ko-KR", { style: "currency", currency: "KRW", maximumFractionDigits: 0 });
+      var number = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 0 });
+
+      function q(sel) { return root.querySelector(sel); }
+      function qa(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+      function signed(value, digits) {
+        var n = Number(value);
+        var sign = n > 0 ? "+" : n < 0 ? "−" : "";
+        return sign + Math.abs(n).toFixed(digits);
+      }
+      function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+      function pointsString(points) {
+        return points.map(function (p) { return p[0].toFixed(2) + "," + p[1].toFixed(2); }).join(" ");
+      }
+      function animatePoints(el, target) {
+        if (!el) return;
+        if (el._raf) cancelAnimationFrame(el._raf);
+        var from = el._points && el._points.length === target.length ? el._points : target;
+        el._points = target;
+        if (reducedMotion || from === target) {
+          el.setAttribute("points", pointsString(target));
+          return;
+        }
+        var start = performance.now();
+        function frame(now) {
+          var t = clamp((now - start) / 220, 0, 1);
+          var eased = 1 - Math.pow(1 - t, 3);
+          var current = target.map(function (p, i) {
+            return [from[i][0] + (p[0] - from[i][0]) * eased, from[i][1] + (p[1] - from[i][1]) * eased];
+          });
+          el.setAttribute("points", pointsString(current));
+          if (t < 1) el._raf = requestAnimationFrame(frame);
+        }
+        el._raf = requestAnimationFrame(frame);
+      }
+      function makePoints(values, width, height, pad, minY, maxY) {
+        var innerW = width - pad.left - pad.right;
+        var innerH = height - pad.top - pad.bottom;
+        var span = maxY - minY || 1;
+        return values.map(function (v, i) {
+          var x = pad.left + innerW * (values.length === 1 ? 0 : i / (values.length - 1));
+          var y = pad.top + innerH * (1 - (v - minY) / span);
+          return [x, y];
+        });
+      }
+
+      qa("[role='tab']").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var selected = button.getAttribute("data-panel");
+          qa("[role='tab']").forEach(function (tab) {
+            var active = tab === button;
+            tab.setAttribute("aria-selected", String(active));
+            tab.classList.toggle("btn-primary", active);
+          });
+          qa(".scl-panel").forEach(function (panel) {
+            panel.hidden = panel.id !== "scl-panel-" + selected;
+          });
+        });
+      });
+
+      var upInput = q("#scl-up");
+      var downInput = q("#scl-down");
+      var cyclesInput = q("#scl-cycles");
+      function renderDrag() {
+        var up = Number(upInput.value) / 100;
+        var down = Number(downInput.value) / 100;
+        var cycles = Number(cyclesInput.value);
+        var startValue = 10000000;
+        var average = (up - down) / 2;
+        var geo = Math.sqrt((1 + up) * (1 - down)) - 1;
+        var actual = [startValue];
+        var averagePath = [startValue];
+        var current = startValue;
+        var avgCurrent = startValue;
+        for (var i = 0; i < cycles; i += 1) {
+          current *= 1 + up;
+          actual.push(current);
+          current *= 1 - down;
+          actual.push(current);
+          avgCurrent *= 1 + average;
+          averagePath.push(avgCurrent);
+          avgCurrent *= 1 + average;
+          averagePath.push(avgCurrent);
+        }
+        q("#scl-up-out").textContent = Math.round(up * 100) + "%";
+        q("#scl-down-out").textContent = Math.round(down * 100) + "%";
+        q("#scl-cycles-out").textContent = cycles + "회";
+        q("#scl-arith").textContent = signed(average * 100, 1) + "%";
+        q("#scl-geo").textContent = signed(geo * 100, 1) + "%";
+        q("#scl-final").textContent = won.format(current);
+        q("#scl-loss-note").textContent = "원금 대비 " + signed((current / startValue - 1) * 100, 1) + "%";
+        q("#scl-arith-note").textContent = Math.abs(average) < 0.0001 ? "평균은 0%로 보입니다" : "겉으로 보이는 평균";
+
+        var all = actual.concat(averagePath);
+        var minY = Math.min.apply(null, all) * 0.9;
+        var maxY = Math.max.apply(null, all) * 1.1;
+        var pad = { left: 72, right: 28, top: 24, bottom: 42 };
+        var actualPoints = makePoints(actual, 720, 300, pad, minY, maxY);
+        var avgPoints = makePoints(averagePath, 720, 300, pad, minY, maxY);
+        animatePoints(q("#scl-drag-real"), actualPoints);
+        animatePoints(q("#scl-drag-avg"), avgPoints);
+
+        var grid = q("#scl-drag-grid");
+        var gridHtml = "";
+        for (var g = 0; g < 4; g += 1) {
+          var gy = pad.top + (300 - pad.top - pad.bottom) * g / 3;
+          var gv = maxY - (maxY - minY) * g / 3;
+          gridHtml += "<line class='grid' x1='" + pad.left + "' x2='692' y1='" + gy + "' y2='" + gy + "'></line>";
+          gridHtml += "<text x='64' y='" + (gy + 4) + "' text-anchor='end'>₩" + (gv / 1000000).toFixed(1) + "M</text>";
+        }
+        gridHtml += "<line class='axis' x1='" + pad.left + "' x2='692' y1='258' y2='258'></line>";
+        gridHtml += "<text x='" + pad.left + "' y='282'>시작</text><text x='692' y='282' text-anchor='end'>" + (cycles * 2) + "개 기간</text>";
+        grid.innerHTML = gridHtml;
+
+        var endActual = actualPoints[actualPoints.length - 1];
+        var endAvg = avgPoints[avgPoints.length - 1];
+        q("#scl-drag-real-dot").setAttribute("cx", endActual[0]);
+        q("#scl-drag-real-dot").setAttribute("cy", endActual[1]);
+        q("#scl-drag-avg-dot").setAttribute("cx", endAvg[0]);
+        q("#scl-drag-avg-dot").setAttribute("cy", endAvg[1]);
+        q("#scl-drag-real-label").setAttribute("x", endActual[0] - 8);
+        q("#scl-drag-real-label").setAttribute("y", endActual[1] + (Math.abs(endActual[1] - endAvg[1]) < 18 ? 18 : -8));
+        q("#scl-drag-real-label").textContent = "실제 " + won.format(current);
+        q("#scl-drag-avg-label").setAttribute("x", endAvg[0] - 8);
+        q("#scl-drag-avg-label").setAttribute("y", endAvg[1] - 8);
+        q("#scl-drag-avg-label").textContent = "평균 가정 " + won.format(avgCurrent);
+      }
+      [upInput, downInput, cyclesInput].forEach(function (input) { input.addEventListener("input", renderDrag); });
+      qa(".scl-preset").forEach(function (button) {
+        button.addEventListener("click", function () {
+          upInput.value = button.getAttribute("data-up");
+          downInput.value = button.getAttribute("data-down");
+          renderDrag();
+        });
+      });
+
+      var weightInput = q("#scl-weight");
+      var corrInput = q("#scl-corr");
+      q("#scl-wave-grid").innerHTML =
+        "<line class='grid' x1='58' x2='682' y1='70' y2='70'></line>" +
+        "<line class='grid' x1='58' x2='682' y1='150' y2='150'></line>" +
+        "<line class='grid' x1='58' x2='682' y1='230' y2='230'></line>" +
+        "<line class='axis' x1='58' x2='682' y1='150' y2='150'></line>" +
+        "<text x='48' y='74' text-anchor='end'>+</text><text x='48' y='154' text-anchor='end'>0</text><text x='48' y='234' text-anchor='end'>−</text>";
+      function renderDiversification() {
+        var w = Number(weightInput.value) / 100;
+        var rho = Number(corrInput.value);
+        var stockVol = 0.30;
+        var bondVol = 0.12;
+        var portfolioVol = Math.sqrt(w * w * stockVol * stockVol + (1 - w) * (1 - w) * bondVol * bondVol + 2 * w * (1 - w) * rho * stockVol * bondVol);
+        var naiveVol = w * stockVol + (1 - w) * bondVol;
+        var expected = w * 0.08 + (1 - w) * 0.04;
+        var benefit = Math.max(0, naiveVol - portfolioVol);
+        q("#scl-weight-out").textContent = Math.round(w * 100) + "%";
+        q("#scl-corr-out").textContent = signed(rho, 2);
+        q("#scl-port-return").textContent = (expected * 100).toFixed(1) + "%";
+        q("#scl-port-vol").textContent = (portfolioVol * 100).toFixed(1) + "%";
+        q("#scl-div-benefit").textContent = (benefit * 100).toFixed(1) + "%p";
+        q("#scl-corr-note").textContent = rho < -0.4 ? "파도가 크게 상쇄됩니다" : rho < 0.5 ? "파도가 일부 상쇄됩니다" : "같이 움직여 효과가 작습니다";
+        q("#scl-stock-bar").style.width = (w * 100) + "%";
+        q("#scl-bond-bar").style.width = ((1 - w) * 100) + "%";
+        q("#scl-stock-bar").textContent = w >= 0.2 ? "주식 " + Math.round(w * 100) + "%" : "";
+        q("#scl-bond-bar").textContent = (1 - w) >= 0.2 ? "채권 " + Math.round((1 - w) * 100) + "%" : "";
+        q(".scl-weight-bar").setAttribute("aria-label", "주식 " + Math.round(w * 100) + "%, 채권 " + Math.round((1 - w) * 100) + "%");
+
+        var stock = [];
+        var bond = [];
+        var port = [];
+        for (var i = 0; i < 36; i += 1) {
+          var a = 0.82 * Math.sin(i * 0.72) + 0.34 * Math.sin(i * 1.81 + 0.4);
+          var independent = 0.78 * Math.sin(i * 0.91 + 1.7) + 0.31 * Math.cos(i * 1.63);
+          var b = rho * a + Math.sqrt(Math.max(0, 1 - rho * rho)) * independent;
+          var stockScaled = a;
+          var bondScaled = b * (bondVol / stockVol);
+          stock.push(stockScaled);
+          bond.push(bondScaled);
+          port.push(w * stockScaled + (1 - w) * bondScaled);
+        }
+        var pad = { left: 58, right: 38, top: 34, bottom: 42 };
+        animatePoints(q("#scl-wave-stock"), makePoints(stock, 720, 300, pad, -1.45, 1.45));
+        animatePoints(q("#scl-wave-bond"), makePoints(bond, 720, 300, pad, -1.45, 1.45));
+        animatePoints(q("#scl-wave-port"), makePoints(port, 720, 300, pad, -1.45, 1.45));
+        q("#scl-wave-desc").textContent = "주식 " + Math.round(w * 100) + "%, 채권 " + Math.round((1 - w) * 100) + "%, 상관계수 " + signed(rho, 2) + "일 때 세 파형을 비교합니다.";
+      }
+      [weightInput, corrInput].forEach(function (input) { input.addEventListener("input", renderDiversification); });
+
+      var epsInput = q("#scl-eps");
+      var peInput = q("#scl-pe");
+      var epsValues = [2000, 4000, 6000, 8000, 10000];
+      var peValues = [10, 15, 20, 25, 30];
+      function renderMatrix(selectedEps, selectedPe) {
+        q("#scl-matrix-head").innerHTML = "<tr><th scope='col'>EPS\\PER</th>" + peValues.map(function (pe) { return "<th scope='col'>" + pe + "배</th>"; }).join("") + "</tr>";
+        q("#scl-matrix-body").innerHTML = epsValues.map(function (eps) {
+          return "<tr><th scope='row'>₩" + number.format(eps) + "</th>" + peValues.map(function (pe) {
+            var selected = eps === selectedEps && pe === selectedPe;
+            return "<td><button type='button' class='btn text-small" + (selected ? " btn-primary" : "") + "' data-eps='" + eps + "' data-pe='" + pe + "' aria-pressed='" + selected + "' aria-label='EPS " + number.format(eps) + "원, PER " + pe + "배, 이론 주가 " + number.format(eps * pe) + "원'>" + number.format(eps * pe / 1000) + "</button></td>";
+          }).join("") + "</tr>";
+        }).join("");
+        qa("#scl-matrix-body button").forEach(function (button) {
+          button.addEventListener("click", function () {
+            epsInput.value = button.getAttribute("data-eps");
+            peInput.value = button.getAttribute("data-pe");
+            renderValuation();
+          });
+        });
+      }
+      function renderWaterfall(eps, pe) {
+        var baselineEps = 6000;
+        var baselinePe = 20;
+        var values = [baselineEps * baselinePe, eps * baselinePe, eps * pe];
+        var labels = ["기준", "EPS 반영", "PER 반영"];
+        var maxValue = Math.max.apply(null, values.concat([120000])) * 1.18;
+        var chartH = 188;
+        var baseY = 224;
+        var barW = 62;
+        var xs = [34, 129, 224];
+        var html = "<line class='axis' x1='24' x2='304' y1='" + baseY + "' y2='" + baseY + "'></line>";
+        values.forEach(function (value, i) {
+          var h = chartH * value / maxValue;
+          var y = baseY - h;
+          var fill = i === 0 ? "var(--muted)" : i === 1 ? "color-mix(in srgb, var(--viz-series-2) 28%, transparent)" : "color-mix(in srgb, var(--viz-series-1) 32%, transparent)";
+          var stroke = i === 0 ? "var(--border)" : i === 1 ? "var(--viz-series-2)" : "var(--viz-series-1)";
+          html += "<rect x='" + xs[i] + "' y='" + y + "' width='" + barW + "' height='" + h + "' rx='7' fill='" + fill + "' stroke='" + stroke + "'></rect>";
+          html += "<text class='label-strong' x='" + (xs[i] + barW / 2) + "' y='" + (y - 8) + "' text-anchor='middle'>₩" + number.format(value / 1000) + "k</text>";
+          html += "<text x='" + (xs[i] + barW / 2) + "' y='248' text-anchor='middle'>" + labels[i] + "</text>";
+        });
+        q("#scl-waterfall-bars").innerHTML = html;
+        q("#scl-waterfall-desc").textContent = "기준 주가 " + won.format(values[0]) + ", EPS 반영 " + won.format(values[1]) + ", PER 반영 " + won.format(values[2]) + "입니다.";
+      }
+      function renderValuation() {
+        var eps = Number(epsInput.value);
+        var pe = Number(peInput.value);
+        var price = eps * pe;
+        q("#scl-eps-out").textContent = won.format(eps);
+        q("#scl-pe-out").textContent = pe + "배";
+        q("#scl-formula-eps").textContent = won.format(eps);
+        q("#scl-formula-pe").textContent = pe + "배";
+        q("#scl-price").textContent = won.format(price);
+        renderWaterfall(eps, pe);
+        renderMatrix(eps, pe);
+      }
+      [epsInput, peInput].forEach(function (input) { input.addEventListener("input", renderValuation); });
+
+      renderDrag();
+      renderDiversification();
+      renderValuation();
+    }());
+  </script>
+</section>
+
+<script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>
