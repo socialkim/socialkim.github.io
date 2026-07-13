@@ -25,6 +25,26 @@
     <link rel="modulepreload" crossorigin href="/park-jungho-voyage/assets/three-9-yl2kmrvt.js">
     <link rel="stylesheet" crossorigin href="/park-jungho-voyage/assets/index-CpIRhMB2.css">
     <style>
+      /* 모바일 조작 중 길게 누르기 선택 메뉴와 드래그를 차단합니다. */
+      .game-shell,
+      .game-shell * {
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .game-shell img,
+      .game-shell canvas {
+        -webkit-user-drag: none;
+        user-drag: none;
+      }
+
+      .touch-controls,
+      .touch-controls button {
+        touch-action: none !important;
+      }
+
       .promo-dock {
         position: fixed;
         right: 28px;
@@ -112,5 +132,18 @@
         <span aria-hidden="true">●</span> 김덕진 소장 소개
       </a>
     </nav>
+    <script>
+      (() => {
+        const isGameTarget = (target) =>
+          target instanceof Element && Boolean(target.closest(".game-shell"));
+        const preventBrowserGesture = (event) => {
+          if (isGameTarget(event.target)) event.preventDefault();
+        };
+
+        document.addEventListener("contextmenu", preventBrowserGesture, { passive: false });
+        document.addEventListener("selectstart", preventBrowserGesture, { passive: false });
+        document.addEventListener("dragstart", preventBrowserGesture, { passive: false });
+      })();
+    </script>
   </body>
 </html>
