@@ -688,8 +688,420 @@ svg {
   color: var(--destructive);
 }
 </style>
+<style id="stock-lab-service-theme">
+  :root {
+    color-scheme: light;
+    --background: #f5f7fb;
+    --foreground: #182230;
+    --card: #ffffff;
+    --card-foreground: #182230;
+    --popover: #ffffff;
+    --popover-foreground: #182230;
+    --primary: #4f7cff;
+    --primary-foreground: #ffffff;
+    --secondary: #ffffff;
+    --secondary-foreground: #344054;
+    --muted: #eef2f7;
+    --muted-foreground: #667085;
+    --accent: #eaf1ff;
+    --accent-foreground: #315fcf;
+    --destructive: #e65d48;
+    --border: #e2e8f0;
+    --input: #d7dfeb;
+    --ring: #4f7cff;
+    --viz-series-1: #4f7cff;
+    --viz-series-2: #f59b5b;
+    --viz-series-3: #38b27d;
+    --viz-series-4: #d879b4;
+    --viz-series-5: #8b75df;
+    --viz-series-6: #38aaa5;
+  }
+  html { scroll-behavior: smooth; }
+  html > body {
+    min-height: 100vh;
+    padding: 0;
+    color: var(--foreground);
+    background:
+      radial-gradient(circle at 7% 2%, rgb(79 124 255 / 13%), transparent 26rem),
+      radial-gradient(circle at 94% 18%, rgb(56 178 125 / 9%), transparent 23rem),
+      var(--background) !important;
+  }
+  .site-shell {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    padding: 0 28px 48px;
+  }
+  .site-nav {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--foreground);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .site-brand:hover { text-decoration: none; }
+  .brand-mark {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 11px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4f7cff, #725fe4);
+    box-shadow: 0 8px 20px rgb(79 124 255 / 28%);
+  }
+  .brand-mark svg { width: 19px; height: 19px; }
+  .site-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .site-links a {
+    padding: 8px 11px;
+    border-radius: 9px;
+    color: #526071;
+  }
+  .site-links a:hover {
+    color: var(--foreground);
+    background: rgb(255 255 255 / 72%);
+    text-decoration: none;
+  }
+  .service-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+    margin-bottom: 28px;
+    padding: clamp(30px, 5vw, 58px);
+    overflow: hidden;
+    border: 1px solid rgb(207 218 236 / 78%);
+    border-radius: 30px;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 96%), rgb(240 245 255 / 94%));
+    box-shadow: 0 24px 70px rgb(38 55 82 / 10%);
+  }
+  .service-hero::before {
+    position: absolute;
+    top: -120px;
+    right: -85px;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(79 124 255 / 18%), transparent 66%);
+    content: "";
+    pointer-events: none;
+  }
+  .hero-copy { position: relative; z-index: 1; min-width: 0; }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: #3e67d4;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4f7cff;
+    box-shadow: 0 0 0 5px rgb(79 124 255 / 13%);
+    content: "";
+  }
+  .hero-copy h1 {
+    max-width: 720px;
+    margin: 0;
+    color: #142033;
+    font-size: clamp(2rem, 4.4vw, 3.7rem);
+    font-weight: 500;
+    letter-spacing: -.055em;
+    line-height: 1.08;
+  }
+  .hero-copy h1 em {
+    color: #4f70e9;
+    font-style: normal;
+  }
+  .hero-description {
+    max-width: 650px;
+    margin-top: 19px;
+    color: #5b687a;
+    font-size: clamp(1rem, 1.7vw, 1.15rem);
+    line-height: 1.7;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .hero-tag {
+    padding: 6px 10px;
+    border: 1px solid #dbe4f2;
+    border-radius: 999px;
+    color: #536176;
+    background: rgb(255 255 255 / 74%);
+    font-size: var(--font-size-small);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 26px;
+  }
+  .hero-actions .btn {
+    min-height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+  .hero-actions .btn-primary {
+    box-shadow: 0 10px 24px rgb(79 124 255 / 24%);
+  }
+  .hero-visual {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+  .market-card {
+    padding: 22px;
+    border: 1px solid rgb(215 224 238 / 92%);
+    border-radius: 22px;
+    background: rgb(255 255 255 / 88%);
+    box-shadow: 0 22px 55px rgb(46 65 97 / 15%);
+    backdrop-filter: blur(16px);
+    transform: rotate(1.2deg);
+  }
+  .market-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #667085;
+  }
+  .market-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #25805c;
+    font-size: var(--font-size-small);
+  }
+  .market-status::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #38b27d;
+    content: "";
+  }
+  .market-value {
+    margin-top: 13px;
+    color: #182230;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: -.04em;
+  }
+  .market-caption { margin-top: 3px; color: #7a8699; }
+  .market-chart {
+    width: 100%;
+    margin: 18px 0 16px;
+    overflow: visible;
+  }
+  .market-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .market-stat {
+    min-width: 0;
+    padding: 9px;
+    border-radius: 10px;
+    color: #6a7687;
+    background: #f6f8fc;
+    text-align: center;
+    font-size: var(--font-size-small);
+  }
+  .market-stat strong {
+    display: block;
+    margin-top: 2px;
+    color: #243247;
+  }
+  .workspace-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 4px 12px;
+    color: #667085;
+  }
+  .workspace-label strong { color: #344054; }
+  #stock-concepts-lab {
+    padding: clamp(18px, 3.3vw, 34px) !important;
+    border: 1px solid #e1e7f0 !important;
+    border-radius: 28px !important;
+    background: #ffffff !important;
+    box-shadow: 0 22px 65px rgb(36 53 78 / 9%) !important;
+  }
+  .btn-primary {
+    border-color: transparent;
+    color: #ffffff;
+    background: var(--primary);
+  }
+  .btn-primary:not(:disabled):hover {
+    color: #ffffff;
+    background: #3f6ce4;
+  }
+  #stock-concepts-lab .scl-tabs {
+    padding: 5px;
+    border-radius: 14px;
+    background: #f3f6fa;
+  }
+  #stock-concepts-lab .scl-tabs .btn {
+    min-height: 38px;
+    flex: 1 1 190px;
+    border-color: transparent;
+    background: transparent;
+  }
+  #stock-concepts-lab .scl-tabs .btn-primary {
+    color: #29436f;
+    background: #ffffff;
+    box-shadow: 0 5px 16px rgb(39 57 88 / 10%);
+  }
+  #stock-concepts-lab .scl-promo {
+    border-color: #dce6f6 !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #eef4ff, #f4f8ff) !important;
+  }
+  #stock-concepts-lab .card {
+    border: 1px solid #e8edf4;
+    background: #fafbfd;
+    box-shadow: 0 8px 20px rgb(43 60 88 / 4%);
+  }
+  #stock-concepts-lab .scl-formula .card:last-of-type {
+    border-color: #cfddff;
+    background: #eef4ff;
+  }
+  #stock-concepts-lab .form-range {
+    background: linear-gradient(#dbe3ef, #dbe3ef) center / 100% 3px no-repeat;
+  }
+  #stock-concepts-lab .form-range::-webkit-slider-thumb {
+    border: 4px solid #ffffff;
+    background: #4f7cff;
+    box-shadow: 0 2px 8px rgb(43 72 140 / 28%);
+  }
+  #stock-concepts-lab .form-range::-moz-range-thumb {
+    border: 4px solid #ffffff;
+    background: #4f7cff;
+    box-shadow: 0 2px 8px rgb(43 72 140 / 28%);
+  }
+  #stock-concepts-lab .scl-weight-bar {
+    border-color: #e1e7f0;
+    background: #f4f6fa;
+  }
+  #stock-concepts-lab .scl-matrix .btn {
+    border-color: #e4eaf2;
+    background: #f8fafc;
+  }
+  #stock-concepts-lab .scl-matrix .btn-primary {
+    border-color: #4f7cff;
+    color: #ffffff;
+    background: #4f7cff;
+  }
+  .site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 22px 5px 0;
+    color: #7a8699;
+    font-size: var(--font-size-small);
+  }
+  .site-footer strong { color: #536176; }
+  @media (max-width: 820px) {
+    .service-hero { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 540px; }
+    .market-card { transform: none; }
+  }
+  @media (max-width: 620px) {
+    .site-shell { padding: 0 14px 32px; }
+    .site-nav { min-height: 64px; }
+    .site-links a:not(.nav-featured) { display: none; }
+    .service-hero { padding: 26px 20px; border-radius: 22px; }
+    .hero-copy h1 { font-size: 2.25rem; }
+    .hero-actions .btn { width: 100%; }
+    .market-card { padding: 17px; }
+    .market-stats { grid-template-columns: 1fr; }
+    .workspace-label { align-items: flex-start; flex-direction: column; }
+    #stock-concepts-lab { border-radius: 20px !important; }
+    .site-footer { align-items: flex-start; flex-direction: column; }
+  }
+</style>
 </head>
 <body>
+<main class="site-shell">
+  <nav class="site-nav" aria-label="주요 메뉴">
+    <a class="site-brand" href="#top" aria-label="Stock Concepts Lab 홈">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 16.5 9 11l3.2 3.2L20 6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 6.5H20V11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Stock Concepts Lab</span>
+    </a>
+    <div class="site-links">
+      <a href="#stock-concepts-lab">학습실</a>
+      <a href="https://www.youtube.com/@%EC%86%90%EA%B2%BD%EC%A0%9C" target="_blank" rel="noopener noreferrer">손경제</a>
+      <a class="nav-featured" href="https://litt.ly/kimdukjin" target="_blank" rel="noopener noreferrer">김덕진 소장</a>
+    </div>
+  </nav>
+
+  <header class="service-hero" id="top">
+    <div class="hero-copy">
+      <div class="hero-eyebrow text-small">Stock Concepts Lab · Interactive Learning</div>
+      <h1>어려운 주식 개념,<br><em>움직여 보면</em> 쉬워집니다</h1>
+      <p class="hero-description">평균수익률의 함정부터 분산투자와 PER까지. 숫자를 직접 바꾸고 그래프의 움직임을 확인하며 투자 개념의 원리를 이해해 보세요.</p>
+      <div class="hero-tags" aria-label="학습 주제">
+        <span class="hero-tag">변동성 드래그</span>
+        <span class="hero-tag">분산과 상관관계</span>
+        <span class="hero-tag">EPS × PER</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#stock-concepts-lab">인터랙티브 학습 시작</a>
+        <a class="btn" href="https://www.youtube.com/@%EC%86%90%EA%B2%BD%EC%A0%9C" target="_blank" rel="noopener noreferrer">손경제 유튜브 바로가기</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="market-card">
+        <div class="market-card-top"><span>복리 시뮬레이션</span><span class="market-status">LIVE</span></div>
+        <div class="market-value">₩10,000,000</div>
+        <div class="market-caption text-small">수익과 손실이 반복될 때 자산의 움직임</div>
+        <svg class="market-chart" viewBox="0 0 390 150" role="presentation">
+          <defs>
+            <linearGradient id="hero-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f7cff" stop-opacity=".24"/><stop offset="1" stop-color="#4f7cff" stop-opacity="0"/></linearGradient>
+          </defs>
+          <path d="M4 125 C35 110 48 69 76 83 S118 120 145 98 S182 42 211 61 S250 113 280 86 S330 39 386 48 L386 146 L4 146Z" fill="url(#hero-area)"/>
+          <path d="M4 125 C35 110 48 69 76 83 S118 120 145 98 S182 42 211 61 S250 113 280 86 S330 39 386 48" fill="none" stroke="#4f7cff" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="386" cy="48" r="6" fill="#ffffff" stroke="#4f7cff" stroke-width="4"/>
+        </svg>
+        <div class="market-stats">
+          <div class="market-stat">산술평균<strong>0.0%</strong></div>
+          <div class="market-stat">복리수익률<strong>−2.0%</strong></div>
+          <div class="market-stat">핵심 개념<strong>변동성</strong></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace-label">
+    <strong>Interactive Learning Workspace</strong>
+    <span class="text-small">아래 숫자를 직접 움직여 결과를 비교해 보세요</span>
+  </div>
 <section id="stock-concepts-lab">
   <style>
     #stock-concepts-lab {
@@ -1319,6 +1731,12 @@ svg {
     }());
   </script>
 </section>
+
+  <footer class="site-footer">
+    <strong>Stock Concepts Lab</strong>
+    <span>IT커뮤니케이션연구소 김덕진 · 교육용 시뮬레이션</span>
+  </footer>
+</main>
 
 <script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
 <script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
