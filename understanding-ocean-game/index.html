@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>언더스탠딩: 세상의 모든 지식의 바다</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game"></div>
+  <div id="damageFlash"></div>
+
+  <div class="hud">
+    <div class="topbar">
+      <div class="brand panel"><strong>UNDERSTANDING</strong><small>세상의 모든 지식의 바다</small></div>
+      <div class="stats panel">
+        <div class="stat"><span>지식</span><b id="knowledge">0 / 8</b></div>
+        <div class="stat"><span>선체</span><b id="health">100%</b></div>
+        <div class="stat"><span>속도</span><b id="speed">0 kn</b></div>
+      </div>
+    </div>
+    <div class="progress-wrap panel">
+      <div class="progress-label"><span>출항</span><b id="objective">지식 8개를 모아 이해의 등대로</b><span>등대</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </div>
+    <div class="mission panel">
+      <h3>항해 임무</h3>
+      <p><span class="key">W</span><span class="key">S</span> 속도 · <span class="key">A</span><span class="key">D</span> 방향 · <span class="key">SPACE</span> 통찰 부스트<br>빛나는 지식 구체 8개를 모은 뒤 북쪽의 황금 등대에 도착하세요.</p>
+    </div>
+    <div id="message"></div>
+  </div>
+
+  <button id="mute" title="소리 켜기/끄기">🔊</button>
+
+  <div class="touch" id="touchControls">
+    <div class="stick">
+      <button class="up" data-key="KeyW">▲</button><button class="down" data-key="KeyS">▼</button>
+      <button class="left" data-key="KeyA">◀</button><button class="right" data-key="KeyD">▶</button>
+    </div>
+    <button class="boost" data-key="Space">BOOST</button>
+  </div>
+
+  <div class="overlay" id="startScreen">
+    <div class="card">
+      <span class="eyebrow">3D KNOWLEDGE OCEAN ADVENTURE</span>
+      <h1>언더스탠딩<em>세상의 모든 지식이라는 바다를 건너다</em></h1>
+      <p class="intro">지식은 섬처럼 흩어져 있고, 오해와 편견은 안개와 폭풍처럼 앞을 가립니다. 배를 몰아 지식을 모으고, 연결하고, 마침내 ‘이해의 등대’에 도착하세요.</p>
+      <div class="feature-row">
+        <div class="feature"><b>🌊 살아 움직이는 바다</b><span>파도와 선박 흔들림</span></div>
+        <div class="feature"><b>💡 지식 수집</b><span>과학·역사·경제·예술</span></div>
+        <div class="feature"><b>⚡ 통찰 부스트</b><span>효과음과 빛 이펙트</span></div>
+      </div>
+      <button id="startBtn">항해 시작하기</button>
+      <div class="credit">소리를 재생하려면 시작 버튼을 눌러주세요.</div>
+    </div>
+  </div>
+
+  <div class="overlay" id="gameover">
+    <div class="card">
+      <span class="eyebrow" id="resultEyebrow">VOYAGE COMPLETE</span>
+      <h2 id="resultTitle">이해의 등대에 도착했습니다</h2>
+      <p class="intro" id="resultText">흩어진 지식을 연결하여 자신만의 이해에 도달했습니다.</p>
+      <br><button id="restartBtn">다시 항해하기</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    Promise.all([
+      fetch('game-part-1.txt').then(r=>r.text()),
+      fetch('game-part-2.txt').then(r=>r.text()),
+      fetch('game-part-3.txt').then(r=>r.text()),
+      fetch('game-part-4.txt').then(r=>r.text())
+    ]).then(parts => new Function(parts.join(''))()).catch(err => {
+      console.error(err);
+      document.body.innerHTML = '<div style="padding:40px;color:white;background:#020b17;font-family:sans-serif">게임을 불러오지 못했습니다. 페이지를 새로고침해 주세요.</div>';
+    });
+  </script>
+</body>
+</html>
