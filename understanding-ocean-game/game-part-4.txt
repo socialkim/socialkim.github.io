@@ -1,0 +1,50 @@
+State.heading),0,Math.cos(boatState.heading)); boat.position.addScaledVector(forward,boatState.velocity*dt);
+        boat.position.x=THREE.MathUtils.clamp(boat.position.x,-worldLimit,worldLimit);boat.position.z=THREE.MathUtils.clamp(boat.position.z,-worldLimit,worldLimit);
+        boat.rotation.y=boatState.heading; boat.position.y=1.2+Math.sin(t*1.5+boat.position.x*.06)*.32;boat.rotation.z=-steer*.14+Math.sin(t*1.7)*.025;boat.rotation.x=Math.sin(t*1.3+boat.position.z*.04)*.035;
+        if(engineOsc){engineOsc.frequency.setTargetAtTime(38+Math.abs(boatState.velocity)*4.5,audioCtx.currentTime,.08);engineGain.gain.setTargetAtTime(muted?0:.01+Math.abs(boatState.velocity)*.0025,audioCtx.currentTime,.1);windGain.gain.setTargetAtTime(muted?0:.018+Math.abs(boatState.velocity)*.002,audioCtx.currentTime,.2);}
+        updateWake(dt,forward);
+      }
+
+      let wakeCursor=0, wakeTimer=0;
+      function updateWake(dt,forward) {
+        wakeTimer+=dt; const attr=wakeParticles.geometry.attributes.position,life=wakeParticles.userData.life;
+        if(Math.abs(boatState.velocity)>.7 && wakeTimer>.035){wakeTimer=0;for(let j=0;j<2;j++){const i=wakeCursor++%life.length;const side=j?1:-1;const p=boat.position.clone().add(new THREE.Vector3(side*.65,.1,2.1).applyAxisAngle(new THREE.Vector3(0,1,0),boatState.heading));attr.setXYZ(i,p.x,p.y,p.z);life[i]=1;}}
+        for(let i=0;i<life.length;i++){if(life[i]>0){life[i]-=dt*.7;attr.setY(i,attr.getY(i)+dt*.08);attr.setX(i,attr.getX(i)+(Math.random()-.5)*dt*.3);}}
+        attr.needsUpdate=true;wakeParticles.material.opacity=.25+Math.min(.55,Math.abs(boatState.velocity)*.05);
+      }
+
+      function collisions(dt,t) {
+        collectibles.forEach(c=>{if(c.userData.collected)return;c.rotation.y+=dt*1.2;c.children[2].rotation.z+=dt*1.7;c.position.y=c.userData.baseY+Math.sin(t*2+c.userData.phase)*.55;if(boat.position.distanceTo(c.position)<4.1){c.userData.collected=true;c.visible=false;collected++;collectSound();emitBurst(c.position.clone(),c.children[1].material.color,55,.28);showMessage(`<span style="color:#ffe27a">${c.userData.name}</span> 지식을 발견했습니다!<br><small>지식의 조각이 이해로 연결됩니다.</small>`);updateUI();}});
+        rocks.forEach(r=>{if(boat.position.distanceTo(r.position)<3.2){const now=performance.now();if(!r.userData.lastHit||now-r.userData.lastHit>1100){r.userData.lastHit=now;health-=16;boatState.velocity*=-.28;hitSound();emitBurst(boat.position.clone(),0xff665d,28,.3);ui.flash.style.opacity=.8;setTimeout(()=>ui.flash.style.opacity=0,160);showMessage('암초 충돌! 선체가 손상되었습니다.');}}});
+        storms.forEach(s=>{s.rotation.y+=dt*.08;s.userData.rain.position.y-=dt*8;if(s.userData.rain.position.y<-10)s.userData.rain.position.y=5;const d=new THREE.Vector2(boat.position.x-s.position.x,boat.position.z-s.position.z).length();if(d<s.userData.radius){boatState.velocity*=Math.pow(.92,dt*4);boatState.heading+=Math.sin(t*8+s.userData.phase)*dt*.24;health-=dt*2.2;if(Math.random()<dt*.35){ui.flash.style.background='rgba(220,240,255,.35)';ui.flash.style.opacity=.75;setTimeout(()=>{ui.flash.style.opacity=0;ui.flash.style.background='radial-gradient(circle, transparent 30%, rgba(255,54,64,.48))';},90);tone(65,.45,'sawtooth',.07,-20);}}});
+        const target=new THREE.Vector3(0,1,-155);if(collected===totalKnowledge&&boat.position.distanceTo(target)<11)endGame(true);if(health<=0)endGame(false);
+      }
+
+      function updateCamera(dt) {
+        const back=new THREE.Vector3(-Math.sin(boatState.heading)*12,8.7,-Math.cos(boatState.heading)*12); const desired=boat.position.clone().add(back);camera.position.lerp(desired,1-Math.pow(.001,dt));const look=boat.position.clone().add(new THREE.Vector3(Math.sin(boatState.heading)*7,1.6,Math.cos(boatState.heading)*7));camera.lookAt(look);
+      }
+
+      function updateParticles(dt,t) {
+        for(let i=particles.length-1;i>=0;i--){const p=particles[i];if(p.type==='burst'){p.life-=dt;const a=p.obj.geometry.attributes.position;for(let k=0;k<p.vel.length;k++){p.vel[k].y-=4.5*dt;a.setXYZ(k,a.getX(k)+p.vel[k].x*dt,a.getY(k)+p.vel[k].y*dt,a.getZ(k)+p.vel[k].z*dt);}a.needsUpdate=true;p.obj.material.opacity=Math.max(0,p.life);if(p.life<=0){scene.remove(p.obj);p.obj.geometry.dispose();p.obj.material.dispose();particles.splice(i,1);}}else if(p.type==='cloud'){p.obj.position.x+=p.obj.userData.speed*dt;if(p.obj.position.x>175)p.obj.position.x=-175;}else if(p.type==='buoy'){p.obj.position.y=.35+Math.sin(t*2+p.phase)*.25;}}
+        if(lighthouse){lighthouse.userData.beam.rotation.x=t*.45;}
+      }
+
+      function bindEvents() {
+        addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+        addEventListener('keydown',e=>{keys[e.code]=true;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.code==='KeyM')toggleMute();});
+        addEventListener('keyup',e=>keys[e.code]=false);
+        document.getElementById('startBtn').addEventListener('click',startGame);document.getElementById('restartBtn').addEventListener('click',resetGame);ui.mute.addEventListener('click',toggleMute);
+        document.querySelectorAll('[data-key]').forEach(b=>{const k=b.dataset.key;const on=e=>{e.preventDefault();keys[k]=true;if(k==='Space')boostSound();};const off=e=>{e.preventDefault();keys[k]=false;};b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointercancel',off);b.addEventListener('pointerleave',off);});
+        addEventListener('keydown',e=>{if(e.code==='Space'&&started&&!e.repeat)boostSound();});
+      }
+
+      function toggleMute(){muted=!muted;ui.mute.textContent=muted?'🔇':'🔊';if(masterGain)masterGain.gain.setTargetAtTime(muted?0:.38,audioCtx.currentTime,.08);}
+
+      function animate() {
+        requestAnimationFrame(animate);const dt=Math.min(.04,clock.getDelta()),t=clock.elapsedTime;ocean.material.uniforms.time.value=t;
+        if(started&&!ended){updateBoat(dt,t);collisions(dt,t);updateCamera(dt);updateUI();}else if(boat){boat.position.y=1.2+Math.sin(t*1.45)*.25;updateCamera(dt);}
+        updateParticles(dt,t);renderer.render(scene,camera);
+      }
+
+      init();
+    })();
