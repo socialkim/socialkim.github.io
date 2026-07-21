@@ -1,0 +1,60 @@
+THREE.MeshStandardMaterial({color:i%2?0xffcc55:0xff5c4e,emissive:i%2?0x5c3d00:0x5c0500,emissiveIntensity:.6}));ball.position.y=2.4;buoy.add(ball);
+          const side=i%2===0?-1:1; buoy.position.set(side*(92+Math.random()*22),.4,150-i*13+Math.random()*6); scene.add(buoy); particles.push({type:'buoy',obj:buoy,phase:Math.random()*6});
+        }
+      }
+
+      function createWake() {
+        const geo=new THREE.BufferGeometry(); const pos=new Float32Array(180*3); geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+        const mat=new THREE.PointsMaterial({color:0xd9ffff,size:.45,transparent:true,opacity:.75,depthWrite:false,blending:THREE.AdditiveBlending});
+        wakeParticles=new THREE.Points(geo,mat); wakeParticles.userData.life=new Float32Array(180); scene.add(wakeParticles);
+      }
+
+      function initAudio() {
+        if(audioCtx) { audioCtx.resume(); return; }
+        audioCtx=new (window.AudioContext||window.webkitAudioContext)(); masterGain=audioCtx.createGain(); masterGain.gain.value=.38; masterGain.connect(audioCtx.destination);
+        engineOsc=audioCtx.createOscillator(); engineGain=audioCtx.createGain(); engineOsc.type='sawtooth'; engineOsc.frequency.value=42; engineGain.gain.value=.015; engineOsc.connect(engineGain).connect(masterGain); engineOsc.start();
+        const buffer=audioCtx.createBuffer(1,audioCtx.sampleRate*2,audioCtx.sampleRate); const data=buffer.getChannelData(0); for(let i=0;i<data.length;i++) data[i]=(Math.random()*2-1)*.35;
+        windSource=audioCtx.createBufferSource(); windSource.buffer=buffer; windSource.loop=true; const filter=audioCtx.createBiquadFilter(); filter.type='lowpass';filter.frequency.value=650;windGain=audioCtx.createGain();windGain.gain.value=.025;windSource.connect(filter).connect(windGain).connect(masterGain);windSource.start();
+      }
+
+      function tone(freq=440,duration=.18,type='sine',vol=.16,slide=0) {
+        if(!audioCtx||muted)return; const o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type=type;o.frequency.setValueAtTime(freq,audioCtx.currentTime); if(slide)o.frequency.exponentialRampToValueAtTime(Math.max(25,freq+slide),audioCtx.currentTime+duration);g.gain.setValueAtTime(vol,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);o.connect(g).connect(masterGain);o.start();o.stop(audioCtx.currentTime+duration);
+      }
+      function collectSound(){tone(520,.12,'sine',.15,160);setTimeout(()=>tone(760,.2,'triangle',.14,180),90);}
+      function hitSound(){tone(95,.35,'sawtooth',.18,-45);}
+      function boostSound(){tone(160,.42,'square',.09,420);}
+      function victorySound(){[392,523,659,784].forEach((n,i)=>setTimeout(()=>tone(n,.45,'triangle',.14,80),i*150));}
+
+      function emitBurst(position,color,count=34,size=.3) {
+        const geo=new THREE.BufferGeometry(),arr=[],vel=[];
+        for(let i=0;i<count;i++){arr.push(0,0,0);const v=new THREE.Vector3((Math.random()-.5)*2,Math.random()*1.6,(Math.random()-.5)*2).normalize().multiplyScalar(2+Math.random()*5);vel.push(v);}
+        geo.setAttribute('position',new THREE.Float32BufferAttribute(arr,3)); const mat=new THREE.PointsMaterial({color,size,transparent:true,opacity:1,depthWrite:false,blending:THREE.AdditiveBlending}); const pts=new THREE.Points(geo,mat);pts.position.copy(position);scene.add(pts);particles.push({type:'burst',obj:pts,vel,life:1.2});
+      }
+
+      function showMessage(text, duration=1700) { ui.message.innerHTML=text; ui.message.classList.add('show'); clearTimeout(showMessage.t); showMessage.t=setTimeout(()=>ui.message.classList.remove('show'),duration); }
+
+      function startGame() { started=true; ended=false; ui.start.style.display='none'; initAudio(); showMessage('돛을 올렸습니다. 지식을 향해 출항합니다!'); }
+      function resetGame() {
+        collected=0;health=100;speed=0;boostEnergy=100;ended=false;started=true; boat.position.set(0,1.1,150);boat.rotation.set(0,Math.PI,0);boatState.heading=Math.PI;boatState.velocity=0;
+        collectibles.forEach(c=>{c.visible=true;c.userData.collected=false;}); ui.gameover.style.display='none'; updateUI(); showMessage('새로운 항해를 시작합니다!');
+      }
+
+      function endGame(win) {
+        if(ended)return;ended=true;started=false;boatState.velocity*=.2;ui.gameover.style.display='grid';
+        if(win){ui.resultEyebrow.textContent='VOYAGE COMPLETE';ui.resultTitle.textContent='이해의 등대에 도착했습니다';ui.resultText.textContent=`${totalKnowledge}개의 지식을 연결했습니다. 지식은 모으는 것에서 끝나지 않고, 서로 연결될 때 비로소 이해가 됩니다.`;victorySound();}
+        else{ui.resultEyebrow.textContent='VOYAGE INTERRUPTED';ui.resultTitle.textContent='항해가 중단되었습니다';ui.resultText.textContent='암초와 폭풍을 피하며 천천히 방향을 잡아보세요. 지식의 바다는 다시 도전할 수 있습니다.';hitSound();}
+      }
+
+      function updateUI() {
+        ui.knowledge.textContent=`${collected} / ${totalKnowledge}`;ui.health.textContent=`${Math.max(0,Math.round(health))}%`;ui.speed.textContent=`${Math.round(Math.abs(boatState.velocity)*6)} kn`;
+        const travel=Math.min(1,Math.max(0,(150-boat.position.z)/312)); const collectRatio=collected/totalKnowledge; ui.progress.style.width=`${Math.min(100,(travel*.45+collectRatio*.55)*100)}%`;
+        ui.objective.textContent=collected<totalKnowledge?`지식 ${totalKnowledge-collected}개가 더 필요합니다`:'이해의 등대로 항해하세요!';
+      }
+
+      function updateBoat(dt,t) {
+        const accelerating=keys.KeyW, braking=keys.KeyS, left=keys.KeyA, right=keys.KeyD, boost=keys.Space && boostEnergy>1;
+        if(accelerating)boatState.velocity+=7.5*dt;else if(braking)boatState.velocity-=6*dt;else boatState.velocity*=Math.pow(.87,dt*4);
+        boatState.velocity=THREE.MathUtils.clamp(boatState.velocity,-3.2,10.5);
+        const steer=(left?1:0)-(right?1:0); const steerPower=(.55+Math.min(1,Math.abs(boatState.velocity)/5))*dt*1.45; boatState.heading+=steer*steerPower*(boatState.velocity>=0?1:-.7);
+        if(boost){boatState.velocity=Math.min(15,boatState.velocity+13*dt);boostEnergy-=28*dt;if(Math.random()<dt*7)emitBurst(boat.position.clone().add(new THREE.Vector3(0,1,2.7).applyAxisAngle(new THREE.Vector3(0,1,0),boatState.heading)),0x62ecff,8,.18);} else boostEnergy=Math.min(100,boostEnergy+11*dt);
+        const forward=new THREE.Vector3(Math.sin(boat
