@@ -1,0 +1,66 @@
+ilGeo = new THREE.BufferGeometry();
+        sailGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,2.6,0, 0,-2.4,0, 3.1,-2.1,0]),3));
+        sailGeo.setIndex([0,1,2]); sailGeo.computeVertexNormals();
+        const sail = new THREE.Mesh(sailGeo,sailMat); sail.position.set(.12,4.1,-.5); sail.rotation.y=Math.PI/2; sail.castShadow=true; g.add(sail);
+        const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.35,.58,5,2), new THREE.MeshStandardMaterial({color:0x36dff5, side:THREE.DoubleSide}));
+        flag.position.set(.7,6.9,-.5); flag.rotation.y=Math.PI/2; g.add(flag);
+        const lamp = new THREE.PointLight(0xffdd75,1.3,22); lamp.position.set(0,2.3,-2.3); g.add(lamp);
+        g.position.set(0,1.1,150); g.rotation.y=Math.PI; return g;
+      }
+
+      function createIsland(x,z,scale=1) {
+        const group = new THREE.Group();
+        const rock = new THREE.Mesh(new THREE.CylinderGeometry(5*scale,8*scale,4*scale,9), new THREE.MeshStandardMaterial({color:0x6e6a57, roughness:.95}));
+        rock.position.y=.25; rock.castShadow=true; rock.receiveShadow=true; group.add(rock);
+        const grass = new THREE.Mesh(new THREE.CylinderGeometry(4.8*scale,5.2*scale,.7*scale,10), new THREE.MeshStandardMaterial({color:0x4f8d4a, roughness:.9}));
+        grass.position.y=2.35*scale; grass.castShadow=true; group.add(grass);
+        group.position.set(x,0,z); scene.add(group); return group;
+      }
+
+      function createKnowledge(x,z,index) {
+        const g = new THREE.Group();
+        const glowMat = new THREE.MeshBasicMaterial({color: new THREE.Color().setHSL(index/totalKnowledge,.8,.62), transparent:true, opacity:.24, blending:THREE.AdditiveBlending, depthWrite:false});
+        const coreMat = new THREE.MeshStandardMaterial({color:new THREE.Color().setHSL(index/totalKnowledge,.75,.56), emissive:new THREE.Color().setHSL(index/totalKnowledge,.8,.28), emissiveIntensity:1.8, metalness:.15, roughness:.15});
+        const glow = new THREE.Mesh(new THREE.SphereGeometry(2.15,18,14),glowMat); g.add(glow);
+        const core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.03,1),coreMat); core.castShadow=true; g.add(core);
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(1.55,.06,8,38), new THREE.MeshBasicMaterial({color:0xeaffff, transparent:true, opacity:.7})); ring.rotation.x=Math.PI/2; g.add(ring);
+        g.position.set(x,3,z); g.userData={name:names[index], index, collected:false, baseY:3, phase:Math.random()*6}; scene.add(g); collectibles.push(g);
+      }
+
+      function createRock(x,z,s=1) {
+        const r = new THREE.Mesh(new THREE.DodecahedronGeometry(2.3*s,0),new THREE.MeshStandardMaterial({color:0x3b4650,roughness:.9}));
+        r.scale.set(1,.9,1.25); r.position.set(x,1.2*s,z); r.rotation.set(Math.random(),Math.random(),Math.random()); r.castShadow=true; scene.add(r); rocks.push(r);
+      }
+
+      function createStorm(x,z) {
+        const g=new THREE.Group();
+        const mat=new THREE.MeshLambertMaterial({color:0x304256,transparent:true,opacity:.9});
+        for(let i=0;i<7;i++){const c=new THREE.Mesh(new THREE.SphereGeometry(4+Math.random()*3,10,8),mat);c.position.set((Math.random()-.5)*10,Math.random()*3,(Math.random()-.5)*7);c.scale.y=.6;g.add(c);}
+        const rainGeo=new THREE.BufferGeometry(); const arr=[]; for(let i=0;i<110;i++) arr.push((Math.random()-.5)*18, -Math.random()*18, (Math.random()-.5)*14);
+        rainGeo.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));
+        const rain=new THREE.Points(rainGeo,new THREE.PointsMaterial({color:0x9edcff,size:.18,transparent:true,opacity:.65})); rain.position.y=-2; g.add(rain);
+        g.position.set(x,13,z); g.userData={radius:13,phase:Math.random()*6,rain}; scene.add(g); storms.push(g);
+      }
+
+      function createLighthouse() {
+        const island=createIsland(0,-162,1.5);
+        lighthouse=new THREE.Group();
+        const tower=new THREE.Mesh(new THREE.CylinderGeometry(1.55,2.35,14,18),new THREE.MeshStandardMaterial({color:0xf3ead8,roughness:.65})); tower.position.y=9; tower.castShadow=true; lighthouse.add(tower);
+        const stripe=new THREE.Mesh(new THREE.CylinderGeometry(1.92,2.0,3.2,18),new THREE.MeshStandardMaterial({color:0xd94c3c,roughness:.55})); stripe.position.y=8.3; lighthouse.add(stripe);
+        const room=new THREE.Mesh(new THREE.CylinderGeometry(2.15,2.15,2.1,18),new THREE.MeshStandardMaterial({color:0x233849,emissive:0x143d4b,emissiveIntensity:.5})); room.position.y=16.1; lighthouse.add(room);
+        const roof=new THREE.Mesh(new THREE.ConeGeometry(2.7,2.3,18),new THREE.MeshStandardMaterial({color:0xb83a31})); roof.position.y=18.3; lighthouse.add(roof);
+        const light=new THREE.PointLight(0xffd55c,4.5,75); light.position.y=16.4; lighthouse.add(light);
+        const beam=new THREE.Mesh(new THREE.ConeGeometry(6,40,18,1,true),new THREE.MeshBasicMaterial({color:0xffe899,transparent:true,opacity:.12,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false})); beam.rotation.z=-Math.PI/2; beam.position.set(20,16.4,0); lighthouse.add(beam); lighthouse.userData.beam=beam;
+        lighthouse.position.set(0,2.7,-162); scene.add(lighthouse); island.add(new THREE.PointLight(0xffe79a,.8,20));
+      }
+
+      function createWorld() {
+        createIsland(-58,95,.7); createIsland(55,73,.75); createIsland(-76,25,.8); createIsland(71,-17,.7); createIsland(-57,-69,.85); createIsland(55,-112,.72);
+        const points=[[-35,120],[46,94],[-70,58],[18,35],[74,5],[-55,-33],[42,-70],[-28,-112]];
+        points.forEach((p,i)=>createKnowledge(p[0],p[1],i));
+        [[12,118,1],[-22,83,.8],[30,61,.9],[-44,35,1.1],[55,28,.8],[-12,-2,.8],[26,-26,1],[-73,-20,.9],[9,-53,1.1],[68,-68,.85],[-40,-94,1],[24,-128,.9]].forEach(r=>createRock(...r));
+        createStorm(-13,77); createStorm(48,15); createStorm(-35,-58); createStorm(30,-102);
+        createLighthouse();
+        for(let i=0;i<25;i++) {
+          const buoy=new THREE.Group(); const pole=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,2.2,8),new THREE.MeshStandardMaterial({color:0xeeeeee}));pole.position.y=1.2;buoy.add(pole);
+          const ball=new THREE.Mesh(new THREE.SphereGeometry(.35,10,8),new 
