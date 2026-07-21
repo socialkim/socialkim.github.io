@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>언더스탠딩: 세상의 모든 지식의 바다</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260721-2">
 </head>
 <body>
   <div id="game"></div>
@@ -67,13 +67,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     Promise.all([
-      fetch('game-part-1.txt').then(r=>r.text()),
-      fetch('game-part-2.txt').then(r=>r.text()),
-      fetch('game-part-3.txt').then(r=>r.text()),
-      fetch('game-part-4.txt').then(r=>r.text())
-    ]).then(parts => new Function(parts.join(''))()).catch(err => {
+      fetch('game-part-1.txt?v=20260721-2').then(r=>{if(!r.ok)throw new Error('part1 '+r.status);return r.text()}),
+      fetch('game-part-2.txt?v=20260721-2').then(r=>{if(!r.ok)throw new Error('part2 '+r.status);return r.text()}),
+      fetch('game-part-3.txt?v=20260721-2').then(r=>{if(!r.ok)throw new Error('part3 '+r.status);return r.text()}),
+      fetch('game-part-4.txt?v=20260721-2').then(r=>{if(!r.ok)throw new Error('part4 '+r.status);return r.text()})
+    ]).then(parts => {
+      if(typeof THREE==='undefined') throw new Error('Three.js CDN load failed');
+      new Function(parts.join(''))();
+    }).catch(err => {
       console.error(err);
-      document.body.innerHTML = '<div style="padding:40px;color:white;background:#020b17;font-family:sans-serif">게임을 불러오지 못했습니다. 페이지를 새로고침해 주세요.</div>';
+      document.body.innerHTML = '<div style="padding:40px;color:white;background:#020b17;font-family:sans-serif"><h2>게임을 불러오지 못했습니다.</h2><p>'+err.message+'</p><p>페이지를 강력 새로고침(Ctrl+F5)해 주세요.</p></div>';
     });
   </script>
 </body>
