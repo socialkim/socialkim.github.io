@@ -25,7 +25,7 @@ h2{font-size:26px;letter-spacing:-.02em;margin:0}h2 small{font-family:var(--mono
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
 .card:hover{border-color:#c9d3e3;box-shadow:0 10px 30px -18px rgba(15,27,45,.35)}
 .org{font-family:var(--mono);font-size:12px;color:var(--mute);margin:0 0 8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.badge{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--ink2);background:var(--skyl);border-radius:6px;padding:1px 7px}.badge.new{background:#FFF1D6;color:#8a5a00}
+.badge{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--ink2);background:var(--skyl);border-radius:6px;padding:1px 7px}.badge.new{background:#FFF1D6;color:#8a5a00}.badge.tool{background:#EEF1F6;color:var(--mute);font-family:var(--mono);font-weight:500}
 .card h3{font-size:17px;line-height:1.4;margin:0 0 8px;letter-spacing:-.01em}.card h3 a{color:var(--ink)}
 .sum{font-size:14px;color:var(--ink2);margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .meta{margin:auto 0 0;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--mute)}

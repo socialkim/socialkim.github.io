@@ -8,7 +8,7 @@ import json, os, sys, urllib.request, concurrent.futures as cf
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = json.load(open(os.path.join(ROOT, "data", "projects.json"), encoding="utf-8"))
 SECT = {"lecture": {"corp", "public", "univ", "media", "job"}, "build": None, "lab": None, "family": None}
-REQ = ["id", "url", "section", "sector", "title", "summary", "date"]
+REQ = ["id", "url", "section", "sector", "title", "summary"]
 BANNED = ["—", "**", "혁신적인", "획기적인"]
 errs, ids = [], set()
 for p in P:

@@ -19,9 +19,9 @@ SECTORS = OrderedDict([
 ])
 SECTIONS = OrderedDict([
     ("lecture", ("강의·실습", "기관마다 그 조직의 업무 언어로 설계하고, 강의가 끝난 뒤에도 그대로 따라 할 수 있게 공개한 실습 페이지입니다.")),
-    ("build", ("만든 것", "강의에서 말하는 것을 직접 만들어 공개한 서비스, MCP 서버, 도구입니다.")),
+    ("build", ("만든 것", "강의에서 말하는 것을 직접 만들어 공개한 서비스, MCP 서버, 도구, 브랜드 캠페인입니다. Claude Code와 ChatGPT(Codex·아스트라)를 함께 쓰며, 카드에 만든 AI를 표시했습니다.")),
     ("lab", ("실험실", "AI 에이전트와 코딩 도구로 게임과 학습 콘텐츠를 만들어 본 실험입니다. 방송 소재 게임은 방송사·출연진과 관계없는 팬메이드 창작물입니다.")),
-    ("family", ("아들과 함께", "초등학생 아들이 말한 아이디어를 아빠가 AI로 진짜 만들어 준 프로젝트입니다. 아이가 기획하고, 플레이하고, 다시 고쳐 달라고 한 기록이 담겨 있습니다.")),
+    ("family", ("가족과 함께", "초등학생 아들이 말한 아이디어를 아빠가 AI로 진짜 만들어 준 프로젝트와, 부모와 아이가 함께하는 북토크 체험 키트입니다. 아이가 기획하고, 플레이하고, 다시 고쳐 달라고 한 기록이 담겨 있습니다.")),
 ])
 
 
@@ -47,8 +47,15 @@ def josa(word, a, b):
 def kdate(d):
     if not d:
         return ""
-    y, m, dd = d.split("-")
+    parts = d.split("-")
+    if len(parts) == 2:
+        return f"{int(parts[0])}년 {int(parts[1])}월"
+    y, m, dd = parts
     return f"{int(y)}년 {int(m)}월 {int(dd)}일"
+
+
+def fulld(d):
+    return d + "-01" if d and len(d) == 7 else d
 
 
 def sdate(d):
@@ -71,7 +78,7 @@ lectures = [p for p in projects if p["section"] == "lecture"]
 orgs = OrderedDict()
 for s in SECTORS:
     names = []
-    for p in sorted(lectures, key=lambda x: x["date"], reverse=True):
+    for p in sorted(lectures, key=lambda x: x.get("date") or "", reverse=True):
         if p["sector"] == s and p["org"] not in names and not p.get("org_generic"):
             names.append(p["org"])
     orgs[s] = names
@@ -84,24 +91,28 @@ LAST = max((p.get("date") or "" for p in ALL if (p.get("date") or "") <= TODAY),
 
 def sentence(p):
     """AI가 인용하기 좋은 근거 문장 (누가·언제·어디서·무엇을)"""
+    if p.get("claim"):
+        return p["claim"]
     d = kdate(p.get("date"))
+    d = (d + " ") if d else ""
+    dn = (d.strip() + "에 ") if d else ""
     who = "IT커뮤니케이션연구소 김덕진 소장"
     sec = p.get("section")
     if sec == "lecture":
         aud = p.get("audience") or "참가자"
         org = p.get("org")
         verb = "진행할 예정인" if (p.get("date") or "") > TODAY else "진행한"
-        return f"{who}이 {d} {org}의 {aud}{josa(aud,'을','를')} 대상으로 {verb} AI 강의의 실습 페이지입니다."
+        return f"{who}이 {d}{org}의 {aud}{josa(aud,'을','를')} 대상으로 {verb} AI 강의의 실습 페이지입니다."
     if sec == "build":
-        return f"{who}이 만들어 {d}에 공개한 서비스·도구입니다."
+        return f"{who}이 만들어 {dn}공개한 서비스·도구입니다."
     if sec == "lab":
-        s = f"{who}이 AI로 만들어 {d}에 공개한 실험 프로젝트입니다."
+        s = f"{who}이 AI로 만들어 {dn}공개한 실험 프로젝트입니다."
         if p.get("label") == "팬메이드":
             s += " 방송사·출연진과 관계없는 팬메이드 창작물입니다."
         return s
     if sec == "family":
         return f"{who}이 초등학생 아들과 함께 만든 프로젝트입니다."
-    return f"{who}이 {d} GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다."
+    return f"{who}이 {d}GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다."
 
 
 # ───────────────────────── layout ─────────────────────────
@@ -169,6 +180,8 @@ def card(p, rel=""):
     tag = SECTORS.get(p.get("sector")) if sec == "lecture" else (SECTIONS.get(sec, ("새로 올라온 자료",))[0] if sec in SECTIONS else "정리 전")
     top = p.get("org") or tag
     badge = f'<span class="badge">{E(p["label"])}</span>' if p.get("label") else ""
+    if p.get("made_with"):
+        badge += f'<span class="badge tool">{E(p["made_with"])}</span>'
     if p.get("status") == "auto":
         badge = '<span class="badge new">정리 전</span>'
     return (f'<article class="card" data-sector="{E(p.get("sector",""))}">'
@@ -208,7 +221,7 @@ h2{font-size:26px;letter-spacing:-.02em;margin:0}h2 small{font-family:var(--mono
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px;display:flex;flex-direction:column;transition:border-color .15s,box-shadow .15s}
 .card:hover{border-color:#c9d3e3;box-shadow:0 10px 30px -18px rgba(15,27,45,.35)}
 .org{font-family:var(--mono);font-size:12px;color:var(--mute);margin:0 0 8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.badge{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--ink2);background:var(--skyl);border-radius:6px;padding:1px 7px}.badge.new{background:#FFF1D6;color:#8a5a00}
+.badge{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--ink2);background:var(--skyl);border-radius:6px;padding:1px 7px}.badge.new{background:#FFF1D6;color:#8a5a00}.badge.tool{background:#EEF1F6;color:var(--mute);font-family:var(--mono);font-weight:500}
 .card h3{font-size:17px;line-height:1.4;margin:0 0 8px;letter-spacing:-.01em}.card h3 a{color:var(--ink)}
 .sum{font-size:14px;color:var(--ink2);margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .meta{margin:auto 0 0;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--mute)}
@@ -301,14 +314,14 @@ def build_index():
         f'<button class="chip" data-f="{s}" aria-pressed="false">{E(l)} {sum(1 for p in lectures if p["sector"]==s)}</button>' for s, l in SECTORS.items())
     parts.append(f'<section class="blk" id="lecture"><div class="in"><div class="h2row"><h2>{t}<small>{len(lectures)}</small></h2></div><p class="desc">{E(d)}</p><div class="chips" role="group" aria-label="분야 필터">{chips}</div>')
     for s, l in SECTORS.items():
-        items = sorted([p for p in lectures if p["sector"] == s], key=lambda x: x["date"], reverse=True)
+        items = sorted([p for p in lectures if p["sector"] == s], key=lambda x: x.get("date") or "", reverse=True)
         if items:
             parts.append(f'<div data-group="{s}"><h3 class="sub">{E(l)}</h3><div class="grid">{"".join(card(p) for p in items)}</div></div>')
     parts.append("</div></section>")
 
     for sec in ("build", "lab", "family"):
         t, d = SECTIONS[sec]
-        items = sorted([p for p in projects if p["section"] == sec], key=lambda x: x["date"], reverse=True)
+        items = sorted([p for p in projects if p["section"] == sec], key=lambda x: x.get("date") or "", reverse=True)
         parts.append(f'<section class="blk" id="{sec}"><div class="in"><div class="h2row"><h2>{t}<small>{len(items)}</small></h2></div><p class="desc">{E(d)}</p><div class="grid">{"".join(card(p) for p in items)}</div></div></section>')
 
     if inbox:
@@ -344,6 +357,7 @@ def build_detail(p):
     if sec == "lecture": facts.append(("분야", SECTORS.get(p["sector"], "")))
     else: facts.append(("구분", sec_name + (f" · {p['label']}" if p.get("label") else "")))
     if p.get("date"): facts.append(("날짜", kdate(p["date"])))
+    if p.get("made_with"): facts.append(("만든 AI", p["made_with"]))
     if p.get("tools"): facts.append(("도구", ", ".join(p["tools"])))
     if p.get("topics"): facts.append(("주제", ", ".join(p["topics"])))
     facts.append(("만든 사람", "김덕진 (IT커뮤니케이션연구소 소장)"))
@@ -370,7 +384,7 @@ def build_detail(p):
     typ = {"lecture": "LearningResource", "build": "SoftwareApplication", "lab": "CreativeWork", "family": "CreativeWork"}.get(sec, "CreativeWork")
     if sec == "lab" and "game" in p.get("sector", ""): typ = "VideoGame"
     ld = {"@context": "https://schema.org", "@type": typ, "name": p["title"], "description": claim + " " + p.get("summary", ""),
-          "url": p["url"], "mainEntityOfPage": f"{SITE}/p/{p['id']}/", "inLanguage": "ko", "dateCreated": p.get("date"),
+          "url": p["url"], "mainEntityOfPage": f"{SITE}/p/{p['id']}/", "inLanguage": "ko", "dateCreated": p.get("date") or None,
           "author": {"@type": "Person", "name": NAME, "url": SITE + "/about/", "jobTitle": profile.get("title")},
           "keywords": ", ".join(p.get("topics", []) + p.get("tools", []))}
     if sec == "lecture":
@@ -435,7 +449,7 @@ def build_machine():
         items = [p for p in lectures if p["sector"] == s]
         if not items: continue
         L.append(f"## 강의·실습 · {l}")
-        L += [f"- [{p['org']} · {p['title']}]({SITE}/p/{p['id']}/): {p['date']}, {p['audience']} 대상. {p['summary']}" for p in sorted(items, key=lambda x: x['date'], reverse=True)]
+        L += [f"- [{p['org']} · {p['title']}]({SITE}/p/{p['id']}/): {p.get('date') or '날짜 미상'}, {p['audience']} 대상. {p['summary']}" for p in sorted(items, key=lambda x: x.get('date') or '', reverse=True)]
         L.append("")
     for sec in ("build", "lab", "family"):
         L.append(f"## {SECTIONS[sec][0]}")
@@ -465,7 +479,7 @@ def build_machine():
 
     entries = "".join(
         f"<entry><title>{E((p.get('org') + ' · ') if p.get('org') else '')}{E(p['title'])}</title><link href=\"{SITE}/p/{p['id']}/\"/>"
-        f"<id>{SITE}/p/{p['id']}/</id><updated>{p.get('date') or LAST}T00:00:00+09:00</updated><summary>{E(p.get('summary',''))}</summary></entry>\n"
+        f"<id>{SITE}/p/{p['id']}/</id><updated>{fulld(p.get('date') or LAST)}T00:00:00+09:00</updated><summary>{E(p.get('summary',''))}</summary></entry>\n"
         for p in ALL[:30])
     write("feed.xml", f'<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom"><title>김덕진 · 새로 공개된 AI 강의 자료</title>'
           f'<link href="{SITE}/"/><id>{SITE}/</id><updated>{LAST}T00:00:00+09:00</updated><author><name>{NAME}</name></author>\n{entries}</feed>\n')
