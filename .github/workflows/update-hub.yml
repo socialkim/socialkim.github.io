@@ -1,0 +1,56 @@
+name: update-hub
+
+# 매일 09:00(KST) 새 레포를 찾아 허브를 다시 만든다.
+# 수동 실행: GitHub > Actions > update-hub > Run workflow
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["data/**", "scripts/**", ".github/workflows/update-hub.yml"]
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: update-hub
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Discover new repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/discover.py
+      - name: Build site
+        run: python3 scripts/build.py
+      - name: Check data
+        run: python3 scripts/check.py
+      - name: Commit if changed
+        id: commit
+        run: |
+          git config user.name "socialkim-hub-bot"
+          git config user.email "socialkim0211@gmail.com"
+          git add -A data index.html about p assets llms.txt llms-full.txt sitemap.xml robots.txt feed.xml
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"; echo "no changes"
+          else
+            git commit -m "hub: auto update $(TZ=Asia/Seoul date +%Y-%m-%d)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Request Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true
