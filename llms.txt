@@ -83,9 +83,9 @@
 - [재난문자 상황판](https://socialkim.github.io/p/korea-disaster-message-dashboard/): 행정안전부 재난문자를 지도 위에 지역, 재난 유형, 긴급도별로 보여 주는 대한민국 재난 상황 대시보드입니다. 광진구청 AI 명사특강 날 공공데이터 활용 예시로 만들었습니다.
 - [광진 아틀라스](https://socialkim.github.io/p/gwangjin-atlas/): 광진구의 3D 건물 지도, 아파트 실거래가, 공원·교통·생활시설을 공공데이터로 한 화면에 모은 동네 탐색 서비스입니다. 광진구 AI 명사특강과 이어지는 작업입니다.
 - [광진 3D: 한강에서 아차산까지](https://socialkim.github.io/p/gwangjin-3d-map/): OpenStreetMap의 건물 윤곽과 도로에 실제 지형 고도 데이터를 결합해 광진구를 3D로 둘러보는 지도입니다. 광진구청 AI 명사특강 날 만들었고, 건물마다 높이의 근거를 확인할 수 있습니다.
-- [STAiR 커피 아틀리에](https://socialkim.github.io/p/stair-coffee-atelier/): 스페셜티 카페 STAiR의 원두 라이브러리, 메뉴 주문, 장바구니와 영수증, 주문 현황판, 관리자 화면까지 담은 카페 주문 시스템입니다. 취향을 물어 오늘의 한 잔을 골라 주는 AI 소믈리에가 들어 있습니다.
+- [STAiR 커피 아틀리에 (가상 카페)](https://socialkim.github.io/p/stair-coffee-atelier/): 가상 스페셜티 카페 STAiR의 원두 라이브러리, 메뉴 주문, 장바구니와 영수증, 주문 현황판, 관리자 화면까지 담은 주문 시스템입니다. ChatGPT 아스트라로 가게 하나를 통째로 만들 수 있는지 시험한 실습 예시이며, 취향을 물어 한 잔을 골라 주는 AI 소믈리에가 들어 있습니다. (실습 예시)
 - [점심예보](https://socialkim.github.io/p/lunch-weather-club/): 현재 위치의 날씨와 취향, 예산으로 오늘 점심 메뉴를 고르고 주변 식당을 찾아 주는 웹앱입니다. 언더스탠딩 유튜브 방송에서 시연하려고 만들었고, 같은 아이디어를 Claude로 만든 '오늘 뭐 먹지'와 비교해 볼 수 있습니다.
-- [FABRITORY 상하이 리서치 투어](https://socialkim.github.io/p/fabritory-shanghai-research/): 상하이의 브랜드, 리테일, 공간, 도시재생을 현장에서 관찰하고 매일의 관찰을 내 사업의 질문과 실행안으로 바꾸는 3박 4일 필드 리서치 프로그램 사이트입니다. 참가 신청과 참가자 로그인 기능을 갖췄습니다.
+- [FABRITORY 상하이 리서치 투어](https://socialkim.github.io/p/fabritory-shanghai-research/): 2026년 6월 상하이 출장에서 본 브랜드, 리테일, 공간, 도시재생을 바탕으로 설계한 가상 필드 리서치 투어 프로그램 사이트입니다. 매일의 관찰을 내 사업의 질문과 실행안으로 바꾸는 3박 4일 일정과 신청 화면을 시안으로 만들었습니다. (가상 프로그램)
 - [마음 자막 극장: FabricTory 스토리랩](https://socialkim.github.io/p/fabrictory-story-lab/): 아이의 짧은 말 뒤에 있는 마음을 자막처럼 켜 보는 패브릭토리 이야기 캠페인입니다. 부모와 아이가 이어 가는 3분 대화 카드와 15초 광고를 담았습니다.
 
 ## 실험실
@@ -98,7 +98,7 @@
 - [머니디깅클럽 토크쇼 시뮬레이터](https://socialkim.github.io/p/money-digging-simulator/): AI로 만든 픽셀아트 인터랙티브 토크쇼 시뮬레이터입니다. (방송 연계)
 - [AI 안전의 딜레마: 시나리오 스튜디오](https://socialkim.github.io/p/ai-safety-game-lab/): AI 안전 경쟁을 죄수의 딜레마로 풀어, 협약 범위와 감시 강도 같은 룰을 바꾸면 기업별 유인이 어떻게 달라지는지 보여 주는 스튜디오입니다. 리더 발언 분석, EPS·PER 계산기, 방송용 그래픽을 함께 제공합니다. (방송 연계)
 - [아스트라 활용기: 실제 작업 화면](https://socialkim.github.io/p/astra-work-gallery-20260923/): 패들렛 수업 분석, 게임의 버전별 변화와 영상 편집, 구글 어스 카메라 경로 수정, 광진구 지도 개선까지 ChatGPT 아스트라로 작업한 실제 화면 14컷과 대화 맥락을 모은 기록입니다.
-- [최욱 무적 풋살: 매불 아레나](https://socialkim.github.io/p/choi-wook-futsal/): 어떤 슛도 골이 되는 3D 풋살 패러디 게임입니다. 직접 뛰거나 자동 중계로 볼 수 있습니다. (팬메이드)
+- [최욱 무적 풋살: 매불 아레나](https://socialkim.github.io/p/choi-wook-futsal/): 어떤 슛도 골이 되는 3D 풋살 패러디 게임입니다. 2026년 9월 9일 매불쇼 생방송 출연에 맞춰 만들었고, 직접 뛰거나 자동 중계로 볼 수 있습니다. (방송 연계)
 - [솔빛농장: 오늘부터 대농부](https://socialkim.github.io/p/solbit-farm/): 씨앗을 심고 두더지를 쫓고 수확한 작물로 집과 농장을 키우는 브라우저 농장 게임입니다. 언더스탠딩 유튜브 방송에서 AI로 게임을 만드는 과정을 보여 주려고 만들었습니다. (방송 연계)
 - [솔빛농장 방송판: 안대표와 이프로](https://socialkim.github.io/p/solbit-farm-show/): 솔빛농장에 방송 출연자를 캐릭터로 만든 두더지 손님이 찾아오는 언더스탠딩 방송판입니다. 농사부터 판매와 업그레이드까지 자동으로 운영하는 방송 모드가 있습니다. (방송 연계)
 

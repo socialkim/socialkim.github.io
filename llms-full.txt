@@ -83,6 +83,14 @@
 - 도구: ChatGPT, Gemini
 - 주제: 대학 수업, 사용자 지정 지침
 
+## STAiR 커피 아틀리에 (가상 카페)
+- 상세: https://socialkim.github.io/p/stair-coffee-atelier/
+- 원본: https://stair-coffee-atelier.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 만들어 2026년 9월 10일에 공개한 서비스·도구입니다.
+- 가상 스페셜티 카페 STAiR의 원두 라이브러리, 메뉴 주문, 장바구니와 영수증, 주문 현황판, 관리자 화면까지 담은 주문 시스템입니다. ChatGPT 아스트라로 가게 하나를 통째로 만들 수 있는지 시험한 실습 예시이며, 취향을 물어 한 잔을 골라 주는 AI 소믈리에가 들어 있습니다.
+- 도구: ChatGPT
+- 주제: 카페, 주문 시스템, AI 추천
+
 ## 솔빛농장 방송판: 안대표와 이프로
 - 상세: https://socialkim.github.io/p/solbit-farm-show/
 - 원본: https://solbit-farm-show.socialkim.chatgpt.site/
@@ -104,6 +112,13 @@
 - 현재 위치의 날씨와 취향, 예산으로 오늘 점심 메뉴를 고르고 주변 식당을 찾아 주는 웹앱입니다. 언더스탠딩 유튜브 방송에서 시연하려고 만들었고, 같은 아이디어를 Claude로 만든 '오늘 뭐 먹지'와 비교해 볼 수 있습니다.
 - 도구: 날씨 API, 지도
 - 주제: 생활 도구
+
+## 최욱 무적 풋살: 매불 아레나
+- 상세: https://socialkim.github.io/p/choi-wook-futsal/
+- 원본: https://choi-wook-futsal.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 2026년 9월 9일에 공개한 실험 프로젝트입니다.
+- 어떤 슛도 골이 되는 3D 풋살 패러디 게임입니다. 2026년 9월 9일 매불쇼 생방송 출연에 맞춰 만들었고, 직접 뛰거나 자동 중계로 볼 수 있습니다.
+- 주제: 게임
 
 ## 재난문자 상황판
 - 상세: https://socialkim.github.io/p/korea-disaster-message-dashboard/
@@ -390,6 +405,13 @@
 - 도구: DeepSeek, Qwen, Kimi
 - 주제: 중국 AI, 반도체
 
+## 패브릭토리 · FABRITORY 상하이 리서치 투어
+- 상세: https://socialkim.github.io/p/fabritory-shanghai-research/
+- 원본: https://fabritory-shanghai-research.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 만들어 2026년 6월에 공개한 서비스·도구입니다.
+- 2026년 6월 상하이 출장에서 본 브랜드, 리테일, 공간, 도시재생을 바탕으로 설계한 가상 필드 리서치 투어 프로그램 사이트입니다. 매일의 관찰을 내 사업의 질문과 실행안으로 바꾸는 3박 4일 일정과 신청 화면을 시안으로 만들었습니다.
+- 주제: 브랜드 리서치, 상하이, 프로그램 사이트
+
 ## SH공사 · 생성형AI는 도시와 공공에게 무엇을 이야기하는가
 - 상세: https://socialkim.github.io/p/sh/
 - 원본: https://socialkim.github.io/sh/
@@ -566,26 +588,4 @@
 - 원본: https://money-digging-simulator.vercel.app
 - IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 2026년 3월 27일에 공개한 실험 프로젝트입니다.
 - AI로 만든 픽셀아트 인터랙티브 토크쇼 시뮬레이터입니다.
-- 주제: 게임
-
-## STAiR 커피 아틀리에
-- 상세: https://socialkim.github.io/p/stair-coffee-atelier/
-- 원본: https://stair-coffee-atelier.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 만들어 공개한 서비스·도구입니다.
-- 스페셜티 카페 STAiR의 원두 라이브러리, 메뉴 주문, 장바구니와 영수증, 주문 현황판, 관리자 화면까지 담은 카페 주문 시스템입니다. 취향을 물어 오늘의 한 잔을 골라 주는 AI 소믈리에가 들어 있습니다.
-- 도구: ChatGPT
-- 주제: 카페, 주문 시스템, AI 추천
-
-## 패브릭토리 · FABRITORY 상하이 리서치 투어
-- 상세: https://socialkim.github.io/p/fabritory-shanghai-research/
-- 원본: https://fabritory-shanghai-research.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 만들어 공개한 서비스·도구입니다.
-- 상하이의 브랜드, 리테일, 공간, 도시재생을 현장에서 관찰하고 매일의 관찰을 내 사업의 질문과 실행안으로 바꾸는 3박 4일 필드 리서치 프로그램 사이트입니다. 참가 신청과 참가자 로그인 기능을 갖췄습니다.
-- 주제: 브랜드 리서치, 상하이, 프로그램 사이트
-
-## 최욱 무적 풋살: 매불 아레나
-- 상세: https://socialkim.github.io/p/choi-wook-futsal/
-- 원본: https://choi-wook-futsal.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 공개한 실험 프로젝트입니다. 방송사·출연진과 관계없는 팬메이드 창작물입니다.
-- 어떤 슛도 골이 되는 3D 풋살 패러디 게임입니다. 직접 뛰거나 자동 중계로 볼 수 있습니다.
 - 주제: 게임
