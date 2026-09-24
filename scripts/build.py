@@ -113,6 +113,17 @@ ICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0
         "%3Ctext x='29' y='44' text-anchor='middle' font-family='system-ui' font-size='34' font-weight='800' fill='white'%3EK%3C/text%3E%3Ccircle cx='48' cy='42' r='5' fill='%23E5261F'/%3E%3C/svg%3E")
 
 
+VKEYS = {"google": "google-site-verification", "naver": "naver-site-verification", "bing": "msvalidate.01"}
+VERIFY = "".join(f'\n<meta name="{VKEYS[k]}" content="{E(v)}">' for k, v in (profile.get("verify") or {}).items() if k in VKEYS and v)
+
+
+C = profile.get("contact") or {}
+def tel(n): return "tel:+82" + n.replace("-", "")[1:]
+CONTACT_TXT = f"{C.get('name','')} {C.get('title','')} · {C.get('mobile','')} · {C.get('office','')} · {profile.get('email','')}" if C else profile.get("email", "")
+CONTACT_HTML = (f'{E(C.get("name"))} {E(C.get("title"))} · <a href="{tel(C["mobile"])}">{E(C["mobile"])}</a> · '
+                f'<a href="{tel(C["office"])}">{E(C["office"])}</a> · <a href="mailto:{E(profile.get("email"))}">{E(profile.get("email"))}</a>') if C else ""
+
+
 def page(path, title, desc, body, jsonld=None, depth=0):
     rel = "../" * depth
     canon = SITE + "/" + path
@@ -126,7 +137,7 @@ def page(path, title, desc, body, jsonld=None, depth=0):
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
-<meta name="author" content="김덕진 (Kim Dukjin)">
+<meta name="author" content="김덕진 (Kim Dukjin)">{VERIFY}
 <link rel="canonical" href="{canon}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="김덕진 · AI 강의와 프로젝트">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{canon}">
@@ -144,7 +155,8 @@ def page(path, title, desc, body, jsonld=None, depth=0):
 </div></header>
 {body}
 <footer class="foot"><div class="in">
-<p><b>{E(NAME)}</b> · IT커뮤니케이션연구소 소장 · <a href="mailto:{E(profile.get('email'))}">{E(profile.get('email'))}</a></p>
+<p><b>{E(NAME)}</b> · IT커뮤니케이션연구소 소장</p>
+<p>강의·자문 문의: {CONTACT_HTML}</p>
 <p>이 사이트는 김덕진 소장의 GitHub 레포를 매일 자동으로 모아 만듭니다. 마지막 공개 {sdate(LAST)} · <a href="{rel}llms.txt">llms.txt</a> · <a href="{rel}sitemap.xml">sitemap</a> · <a href="{rel}feed.xml">feed</a> · <a href="https://github.com/socialkim">GitHub</a></p>
 </div></footer>
 </body>
@@ -209,7 +221,7 @@ h2{font-size:26px;letter-spacing:-.02em;margin:0}h2 small{font-family:var(--mono
 .orgs div{margin:0}.orgs dt{font-family:var(--mono);font-size:12px;color:var(--mute);margin-bottom:6px}.orgs dd{margin:0;font-size:15px;line-height:1.75;color:var(--ink)}
 .band{background:var(--ink);color:#DCE4F0;border-radius:20px;padding:40px 32px;margin:24px 0}
 .band h2{color:#fff}.band p{max-width:720px}.band a.btn{display:inline-block;margin-top:10px;background:var(--sky);color:var(--ink);font-weight:700;padding:11px 20px;border-radius:999px}.band a.btn:hover{text-decoration:none;filter:brightness(1.05)}
-.band a{color:var(--sky)}
+.band a{color:var(--sky)}a[href^="tel:"],a[href^="mailto:"]{white-space:nowrap}.band .who{font-size:15px;color:#fff;margin:14px 0 6px}
 .foot{border-top:1px solid var(--line);padding:30px 0 50px;font-size:13px;color:var(--mute)}.foot p{margin:4px 0}
 /* detail */
 .crumb{font-size:13px;color:var(--mute);padding:28px 0 0}.crumb a{color:var(--mute)}
@@ -242,7 +254,8 @@ def person_ld():
     return {
         "@type": "Person", "@id": SITE + "/about/#person", "name": NAME, "alternateName": [profile.get("name_en"), profile.get("handle")],
         "jobTitle": profile.get("title"), "description": profile.get("intro"), "url": SITE + "/about/", "email": "mailto:" + profile.get("email", ""),
-        "worksFor": {"@type": "Organization", "name": "IT커뮤니케이션연구소 (ITCL)", "url": "http://itcl.kr/"},
+        "worksFor": {"@type": "Organization", "name": "IT커뮤니케이션연구소 (ITCL)", "url": "http://itcl.kr/", "email": profile.get("email"),
+                     "contactPoint": {"@type": "ContactPoint", "contactType": "강의·자문 문의", "email": profile.get("email"), "telephone": "+82-" + C.get("office", "")[1:], "areaServed": "KR", "availableLanguage": "Korean"}},
         "affiliation": [{"@type": "CollegeOrUniversity", "name": "세종사이버대학교"}, {"@type": "CollegeOrUniversity", "name": "서울시립대학교"}],
         "knowsAbout": profile.get("knows_about", []),
         "sameAs": [l["u"] for l in profile.get("links", []) if l["u"].startswith("http")],
@@ -304,7 +317,8 @@ def build_index():
     parts.append(f"""<section class="blk"><div class="in"><div class="band">
 <h2>우리 조직에 맞는 AI 강의가 필요하다면</h2>
 <p>위 실습 페이지들은 모두 그 기관의 업무 언어로 새로 설계한 것입니다. 경영진 세미나, 직무별 실습, 교직원 연수, 주민 특강까지 대상에 맞춰 준비합니다.</p>
-<a class="btn" href="mailto:{E(profile.get('email'))}">강의·자문 문의</a> &nbsp; <a href="about/">김덕진 소개 보기</a>
+<p class="who">문의 담당 {CONTACT_HTML}</p>
+<a class="btn" href="mailto:{E(profile.get('email'))}">강의·자문 문의 메일 보내기</a> &nbsp; <a href="about/">김덕진 소개 보기</a>
 </div></div></section>
 </main>
 {FILTER_JS}""")
@@ -378,7 +392,7 @@ def build_about():
         ("김덕진은 누구인가요?", f"{pr.get('intro')} 현재 {', '.join(pr.get('roles', [])[:4])} 등으로 활동합니다."),
         ("어떤 기관에서 AI 강의를 했나요?", f"이 사이트에 실습 페이지가 공개된 곳만 {n_orgs}곳입니다. " + " / ".join(f"{l}: {', '.join(orgs[s])}" for s, l in SECTORS.items() if orgs[s]) + ". 비공개로 진행한 강의는 여기에 적지 않았습니다."),
         ("강의는 어떤 방식인가요?", "강의마다 그 조직의 업무 언어로 된 실습 페이지를 새로 만들어 공개합니다. 참가자는 프롬프트를 눌러 복사하고 가상 연습 파일로 따라 하며, 강의가 끝난 뒤에도 같은 페이지로 복습할 수 있습니다. ChatGPT, Gemini, Claude, NotebookLM, MCP 연결, AI 에이전트 만들기, 바이브코딩까지 대상 수준에 맞춰 다룹니다."),
-        ("강의나 자문은 어떻게 요청하나요?", f"이메일 {pr.get('email')} 또는 IT커뮤니케이션연구소(itcl.kr)로 문의하시면 됩니다."),
+        ("강의나 자문은 어떻게 요청하나요?", f"IT커뮤니케이션연구소 {C.get('name','')} {C.get('title','')}에게 문의하시면 됩니다. 휴대전화 {C.get('mobile','')}, 사무실 {C.get('office','')}, 이메일 {pr.get('email')}."),
     ]
     body = f"""<main class="in">
 <section class="hero" style="padding-bottom:10px">
@@ -397,7 +411,8 @@ def build_about():
 <p>전체 목록은 <a href="../#lecture">강의·실습</a>에서, 기관별 상세는 각 카드의 '자세히'에서 볼 수 있습니다.</p>
 <h2>자주 묻는 질문</h2>
 {''.join(f'<details><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faqs)}
-<h2>연락처와 채널</h2><ul><li>이메일: <a href="mailto:{E(pr.get('email'))}">{E(pr.get('email'))}</a></li>{''.join(f'<li><a href="{E(l["u"])}" rel="me noopener" target="_blank">{E(l["t"])}</a></li>' for l in pr.get('links', []))}</ul>
+<h2>강의·자문 문의</h2><ul><li>{CONTACT_HTML}</li><li>IT커뮤니케이션연구소 (ITCL)</li></ul>
+<h2>채널</h2><ul>{''.join(f'<li><a href="{E(l["u"])}" rel="me noopener" target="_blank">{E(l["t"])}</a></li>' for l in pr.get('links', []))}</ul>
 </div>
 </main>"""
     ld = {"@context": "https://schema.org", "@graph": [
@@ -415,7 +430,7 @@ def build_machine():
     L = [f"# {NAME} ({pr.get('name_en')}) · AI 강의와 프로젝트 아카이브", "",
          f"> {pr.get('intro')}", "",
          "## 인물", *[f"- {r}" for r in pr.get("roles", [])], *[f"- {b}" for b in pr.get("broadcasts", [])],
-         "- 저서: " + ", ".join(f"『{b['t']}』" for b in pr.get("books", [])), f"- 연락: {pr.get('email')} · http://itcl.kr/", f"- 소개 페이지: {SITE}/about/", ""]
+         "- 저서: " + ", ".join(f"『{b['t']}』" for b in pr.get("books", [])), f"- 강의·자문 문의: {CONTACT_TXT} · http://itcl.kr/", f"- 소개 페이지: {SITE}/about/", ""]
     for s, l in SECTORS.items():
         items = [p for p in lectures if p["sector"] == s]
         if not items: continue

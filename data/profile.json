@@ -43,7 +43,7 @@
   ],
   "writing_now": "AI 2027 집필 중",
   "stats_note": "강연·방송 누적 1,000회 이상",
-  "email": "kimdukjin@itcl.kr",
+  "email": "info@itcl.kr",
   "links": [
     {
       "t": "IT커뮤니케이션연구소",
@@ -106,5 +106,17 @@
       "h": "직접 만들어 보여 주기",
       "p": "MCP 서버, 실시간 모니터링 서비스, AI 에이전트로 만든 게임처럼 강의에서 말하는 것을 직접 만들어 공개합니다."
     }
-  ]
+  ],
+  "verify": {
+    "google": "",
+    "naver": "",
+    "bing": ""
+  },
+  "contact": {
+    "name": "심성은",
+    "title": "팀장",
+    "mobile": "010-8024-4569",
+    "office": "02-6953-3379",
+    "email": "info@itcl.kr"
+  }
 }

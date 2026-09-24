@@ -38,7 +38,7 @@ h2{font-size:26px;letter-spacing:-.02em;margin:0}h2 small{font-family:var(--mono
 .orgs div{margin:0}.orgs dt{font-family:var(--mono);font-size:12px;color:var(--mute);margin-bottom:6px}.orgs dd{margin:0;font-size:15px;line-height:1.75;color:var(--ink)}
 .band{background:var(--ink);color:#DCE4F0;border-radius:20px;padding:40px 32px;margin:24px 0}
 .band h2{color:#fff}.band p{max-width:720px}.band a.btn{display:inline-block;margin-top:10px;background:var(--sky);color:var(--ink);font-weight:700;padding:11px 20px;border-radius:999px}.band a.btn:hover{text-decoration:none;filter:brightness(1.05)}
-.band a{color:var(--sky)}
+.band a{color:var(--sky)}a[href^="tel:"],a[href^="mailto:"]{white-space:nowrap}.band .who{font-size:15px;color:#fff;margin:14px 0 6px}
 .foot{border-top:1px solid var(--line);padding:30px 0 50px;font-size:13px;color:var(--mute)}.foot p{margin:4px 0}
 /* detail */
 .crumb{font-size:13px;color:var(--mute);padding:28px 0 0}.crumb a{color:var(--mute)}
