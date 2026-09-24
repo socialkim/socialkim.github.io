@@ -8,6 +8,14 @@
 - 도구: ChatGPT
 - 주제: 업무 자동화, 데이터 분석, 보안 설정
 
+## 보프의 리듬 원정대
+- 상세: https://socialkim.github.io/p/suchan-rhythm-quest/
+- 원본: https://suchan-rhythm-quest.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 9월 24일 초등학생 아들이 상상한 캐릭터와 규칙으로 ChatGPT와 함께 하루 만에 만든 리듬 게임입니다.
+- 초등학생 아들이 상상한 리듬 배틀을 실제로 플레이할 수 있게 만든 브라우저 음악 게임입니다. 다섯 라이벌에게 쉬움부터 어려움까지 도전할 수 있고, 키보드와 터치로 즐깁니다. 아이의 한마디에서 하루 만에 게임이 되기까지의 제작 기록과 이어집니다.
+- 도구: ChatGPT, GPT Work
+- 주제: 아이와 함께, 리듬게임, 게임 제작
+
 ## 상상이 움직이기까지: 아빠와 아들의 AI 창작 기록
 - 상세: https://socialkim.github.io/p/suchan-imagination-to-reality/
 - 원본: https://suchan-imagination-to-reality.socialkim.chatgpt.site/
