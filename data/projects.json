@@ -1522,13 +1522,13 @@
   "id": "teum-creative-lab",
   "url": "https://teum-creative-lab.socialkim.chatgpt.site/",
   "repo": null,
-  "section": "lab",
-  "sector": "demo",
-  "org": "",
-  "audience": "",
-  "title": "틈을 따다: TEUM Creative Lab",
-  "summary": "가상 음료 브랜드 TEUM의 광고, 15초 브랜드 필름, 참여형 프로모션을 직접 바꿔 보는 캠페인 랩입니다. 온더플래닛 강의에서 AI로 광고 캠페인을 만드는 과정을 시연하는 데 썼습니다.",
-  "date": "",
+  "section": "lecture",
+  "sector": "corp",
+  "org": "온더플래닛",
+  "audience": "임직원",
+  "title": "틈을 따다: AI로 만드는 광고 캠페인 시연",
+  "summary": "가상 음료 브랜드 TEUM의 광고, 15초 브랜드 필름, 참여형 프로모션을 직접 바꿔 보는 캠페인 랩입니다. 카피와 매체 비율을 바꾸며 AI로 캠페인을 만드는 과정을 따라 할 수 있습니다.",
+  "date": "2026-09-07",
   "tools": [],
   "topics": [
    "광고 캠페인",
@@ -1536,7 +1536,7 @@
   ],
   "status": "curated",
   "made_with": "ChatGPT",
-  "label": "강의 시연"
+  "claim": "IT커뮤니케이션연구소 김덕진 소장이 2026년 9월 7일 온더플래닛 강의에서 AI로 광고 캠페인을 만드는 과정을 보여 주려고 만든 예시 페이지입니다."
  },
  {
   "id": "ai-safety-game-lab",
