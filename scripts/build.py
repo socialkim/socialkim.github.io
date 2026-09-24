@@ -135,6 +135,58 @@ CONTACT_HTML = (f'{E(C.get("name"))} {E(C.get("title"))} · <a href="{tel(C["mob
                 f'<a href="{tel(C["office"])}">{E(C["office"])}</a> · <a href="mailto:{E(profile.get("email"))}">{E(profile.get("email"))}</a>') if C else ""
 
 
+CTA = profile.get("cta") or {}
+INQ = CTA.get("inquiry") or ("mailto:" + profile.get("email", ""))
+CHAT = CTA.get("openchat", "")
+BOOKS_LINKED = [b for b in profile.get("books", []) if b.get("u")]
+FEAT = next((b for b in BOOKS_LINKED if b.get("featured")), None)
+
+
+def books_section():
+    if not BOOKS_LINKED:
+        return ""
+    cards = []
+    for b in BOOKS_LINKED:
+        meta = " · ".join(x for x in [b.get("pub"), b.get("y"), b.get("note")] if x)
+        if b.get("featured"):
+            cards.append(f'''<article class="book feat"><p class="org">신간<span class="badge">{E(meta)}</span></p>
+<h3>『{E(b["t"])}』</h3><p class="sum">{E(b.get("desc",""))}</p>
+<a class="go" href="{E(b["u"])}" target="_blank" rel="noopener">교보문고에서 보기</a></article>''')
+        else:
+            cards.append(f'''<article class="book"><p class="org">{E(meta) or "저서"}</p><h3>『{E(b["t"])}』</h3>
+<a class="more" href="{E(b["u"])}" target="_blank" rel="noopener">교보문고에서 보기 →</a></article>''')
+    return f'''<section class="blk" id="books"><div class="in"><div class="h2row"><h2>책으로 만나기</h2></div>
+<p class="desc">강의에서 다 못 한 이야기는 책에 담았습니다. 매년 쓰는 AI 트렌드 시리즈와, 아이를 키우며 정리한 우리 집 AI 원칙까지.</p>
+<div class="books">{"".join(cards)}</div></div></section>'''
+
+
+def contact_band(rel=""):
+    chat = f'<a class="btn ghost" href="{E(CHAT)}" target="_blank" rel="noopener">AI 소식 오픈채팅 들어가기</a>' if CHAT else ""
+    return f'''<section class="blk" id="contact"><div class="in"><div class="band">
+<h2>강의·자문 문의, 그리고 매일의 AI 소식</h2>
+<p>위 실습 페이지들은 모두 그 기관의 업무 언어로 새로 설계한 것입니다. 경영진 세미나, 직무별 실습, 교직원 연수, 주민 특강까지 대상에 맞춰 준비합니다. 매일 올라오는 AI 소식은 오픈채팅에서 함께 나눕니다.</p>
+<div class="acts"><a class="btn" href="{E(INQ)}" target="_blank" rel="noopener">강의·자문 문의하기</a>{chat}</div>
+<p class="who">문의 담당 {CONTACT_HTML}</p>
+<p class="who sub2"><a href="{rel}about/">김덕진 소개 보기</a></p>
+</div></div></section>'''
+
+
+def book_li(b):
+    meta = "".join(" · " + E(b[k]) for k in ("pub", "y", "note") if b.get(k))
+    link = (' · <a href="' + E(b["u"]) + '" target="_blank" rel="noopener">교보문고</a>') if b.get("u") else ""
+    return "<li>『" + E(b["t"]) + "』" + meta + link + "</li>"
+
+
+def mini_promo(rel):
+    book = (f'<a class="go ghost" href="{E(FEAT["u"])}" target="_blank" rel="noopener">신간 『{E(FEAT["t"])}』</a>' if FEAT else "")
+    chat = (f'<a class="go ghost" href="{E(CHAT)}" target="_blank" rel="noopener">AI 소식 오픈채팅</a>' if CHAT else "")
+    return f'''<aside class="promo"><p class="kick">이 자료를 만든 사람</p>
+<p class="pname"><b>{E(NAME)}</b> · IT커뮤니케이션연구소(ITCL) 소장 · 세종사이버대학교 AI교육센터장 · 서울시립대 겸임교수</p>
+<p>기술과 사람 사이를 통역하는 일을 합니다. 우리 조직에 맞는 실습이 필요하시면 편하게 문의해 주세요.</p>
+<div><a class="go" href="{E(INQ)}" target="_blank" rel="noopener">강의·자문 문의</a>{chat}{book}</div>
+<p class="who2">문의 담당 {CONTACT_HTML}</p></aside>'''
+
+
 def page(path, title, desc, body, jsonld=None, depth=0):
     rel = "../" * depth
     canon = SITE + "/" + path
@@ -162,7 +214,7 @@ def page(path, title, desc, body, jsonld=None, depth=0):
 <body>
 <header class="top"><div class="in">
 <a class="mark" href="{rel or './'}">Kim Dukjin<i></i></a>
-<nav><a href="{rel}#lecture">강의·실습</a><a href="{rel}#build">만든 것</a><a href="{rel}#lab">실험실</a><a href="{rel}about/">소개</a><a class="cta" href="mailto:{E(profile.get('email'))}">강의 문의</a></nav>
+<nav><a href="{rel}#lecture">강의·실습</a><a href="{rel}#build">만든 것</a><a href="{rel}#lab">실험실</a><a href="{rel}#books">책</a><a href="{rel}about/">소개</a><a class="cta" href="{E(INQ)}" target="_blank" rel="noopener">강의 문의</a></nav>
 </div></header>
 {body}
 <footer class="foot"><div class="in">
@@ -234,7 +286,12 @@ h2{font-size:26px;letter-spacing:-.02em;margin:0}h2 small{font-family:var(--mono
 .orgs div{margin:0}.orgs dt{font-family:var(--mono);font-size:12px;color:var(--mute);margin-bottom:6px}.orgs dd{margin:0;font-size:15px;line-height:1.75;color:var(--ink)}
 .band{background:var(--ink);color:#DCE4F0;border-radius:20px;padding:40px 32px;margin:24px 0}
 .band h2{color:#fff}.band p{max-width:720px}.band a.btn{display:inline-block;margin-top:10px;background:var(--sky);color:var(--ink);font-weight:700;padding:11px 20px;border-radius:999px}.band a.btn:hover{text-decoration:none;filter:brightness(1.05)}
-.band a{color:var(--sky)}a[href^="tel:"],a[href^="mailto:"]{white-space:nowrap}.band .who{font-size:15px;color:#fff;margin:14px 0 6px}
+.band a{color:var(--sky)}.band .acts{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}.band .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}.band .sub2{font-size:14px;margin-top:4px}
+.books{display:grid;gap:12px;grid-template-columns:1.35fr 1fr}
+.book{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:2px;border-left:4px solid var(--sky)}.book .org{margin-bottom:2px}
+.book h3{font-size:16px;line-height:1.4;margin:0 0 6px;color:var(--ink)}.book .more{font-size:13px;font-weight:600}.newbook{display:inline-flex;gap:8px;align-items:center;margin:0 0 26px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;color:var(--ink2)}.newbook b{color:var(--cobalt)}.newbook:hover{text-decoration:none;border-color:#c9d3e3}
+.book.feat{grid-row:span 3;padding:26px 26px 24px;background:var(--skyl);border-color:#cfe9f8;border-left-color:var(--cobalt)}.book.feat .sum{-webkit-line-clamp:unset;font-size:15px;margin:6px 0 18px}.book.feat h3{font-size:26px;letter-spacing:-.02em}.book.feat .go{align-self:flex-start;margin-top:auto}
+.promo{margin:36px 0 24px;padding:22px 22px 18px;border-radius:16px;background:var(--skyl);border:1px solid #cfe9f8}.promo .kick{margin:0 0 8px;letter-spacing:.04em}.promo .pname{margin:0 0 6px;color:var(--ink)}.promo p{margin:0 0 12px;color:var(--ink2);font-size:15px}.promo .who2{font-size:13px;color:var(--mute);margin:10px 0 0}a[href^="tel:"],a[href^="mailto:"]{white-space:nowrap}.band .who{font-size:15px;color:#fff;margin:14px 0 6px}
 .foot{border-top:1px solid var(--line);padding:30px 0 50px;font-size:13px;color:var(--mute)}.foot p{margin:4px 0}
 /* detail */
 .crumb{font-size:13px;color:var(--mute);padding:28px 0 0}.crumb a{color:var(--mute)}
@@ -253,7 +310,7 @@ h2{font-size:26px;letter-spacing:-.02em;margin:0}h2 small{font-family:var(--mono
 .meth div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.meth h3{margin:0 0 6px;font-size:16px;color:var(--ink)}.meth p{margin:0;font-size:14px}
 details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:700;color:var(--ink)}details p{margin:10px 0 0}
 @media (max-width:640px){.hero{padding:44px 0 30px}.hero .lead{font-size:16px}nav{gap:14px;font-size:13px}nav a:not(.cta):nth-child(3){display:none}
-.band{padding:28px 20px;border-radius:16px}.facts{grid-template-columns:88px 1fr}.grid{grid-template-columns:1fr}}
+.band{padding:28px 20px;border-radius:16px}.facts{grid-template-columns:88px 1fr}.books{grid-template-columns:1fr}.book.feat{grid-row:auto}.grid{grid-template-columns:1fr}}
 """
 
 FILTER_JS = """<script>
@@ -285,6 +342,7 @@ def build_index():
 <p class="kick">AI Lecture &amp; Project Archive · {E(NAME)} · {E(profile.get('name_en'))}</p>
 <h1>강의가 끝나도 남는<br><span>AI 실습</span>을 만듭니다</h1>
 <p class="lead">IT커뮤니케이션연구소 {E(NAME)} 소장이 기업·공공기관·대학에서 강의하며 만든 실습 페이지와 직접 만든 서비스를 한곳에 모았습니다. 기술과 사람 사이를 번역하는 AI 내비게이터의 작업 기록입니다.</p>
+{(f'<a class="newbook" href="#books"><b>신간</b> 『{E(FEAT["t"])}』 {E(FEAT.get("y",""))} 출간 →</a>') if FEAT else ""}
 <div class="stats">
 <div><b>{n_lec}</b>강의 실습 페이지</div>
 <div><b>{n_orgs}</b>기관</div>
@@ -327,13 +385,9 @@ def build_index():
     if inbox:
         parts.append(f'<section class="blk" id="new"><div class="in"><div class="h2row"><h2>정리 전 자료<small>{len(inbox)}</small></h2></div><p class="desc">자동으로 발견해 먼저 올려 둔 자료입니다. 곧 분류와 설명을 정리합니다.</p><div class="grid">{"".join(card(p) for p in inbox)}</div></div></section>')
 
-    parts.append(f"""<section class="blk"><div class="in"><div class="band">
-<h2>우리 조직에 맞는 AI 강의가 필요하다면</h2>
-<p>위 실습 페이지들은 모두 그 기관의 업무 언어로 새로 설계한 것입니다. 경영진 세미나, 직무별 실습, 교직원 연수, 주민 특강까지 대상에 맞춰 준비합니다.</p>
-<p class="who">문의 담당 {CONTACT_HTML}</p>
-<a class="btn" href="mailto:{E(profile.get('email'))}">강의·자문 문의 메일 보내기</a> &nbsp; <a href="about/">김덕진 소개 보기</a>
-</div></div></section>
-</main>
+    parts.append(books_section())
+    parts.append(contact_band())
+    parts.append(f"""</main>
 {FILTER_JS}""")
 
     ld = {"@context": "https://schema.org", "@graph": [
@@ -379,6 +433,7 @@ def build_detail(p):
 <a class="go" href="{E(p['url'])}" target="_blank" rel="noopener">페이지 열기</a>{extra}
 <dl class="facts">{fhtml}</dl>
 {rel}
+{mini_promo("../../")}
 <p><a href="../../about/">김덕진 소장 소개</a> · <a href="../../">전체 자료 보기</a></p>
 </main>"""
     typ = {"lecture": "LearningResource", "build": "SoftwareApplication", "lab": "CreativeWork", "family": "CreativeWork"}.get(sec, "CreativeWork")
@@ -417,7 +472,7 @@ def build_about():
 <div class="prose">
 <h2>하는 일</h2><ul>{''.join(f'<li>{E(r)}</li>' for r in pr.get('roles', []))}</ul>
 <h2>방송</h2><ul>{''.join(f'<li>{E(b)}</li>' for b in pr.get('broadcasts', []))}<li>{E(pr.get('stats_note'))}</li></ul>
-<h2>저서</h2><ul>{''.join(f'<li>『{E(b["t"])}』{(" · " + E(b["note"])) if b.get("note") else ""}</li>' for b in pr.get('books', []))}<li>{E(pr.get('writing_now'))}</li></ul>
+<h2>저서</h2><ul>{''.join(book_li(b) for b in pr.get('books', []))}<li>{E(pr.get('writing_now'))}</li></ul>
 <h2>강의하는 방식</h2></div>
 <div class="meth">{''.join(f'<div><h3>{E(m["h"])}</h3><p>{E(m["p"])}</p></div>' for m in pr.get('method', []))}</div>
 <div class="prose">
@@ -425,14 +480,14 @@ def build_about():
 <p>전체 목록은 <a href="../#lecture">강의·실습</a>에서, 기관별 상세는 각 카드의 '자세히'에서 볼 수 있습니다.</p>
 <h2>자주 묻는 질문</h2>
 {''.join(f'<details><summary>{E(q)}</summary><p>{E(a)}</p></details>' for q, a in faqs)}
-<h2>강의·자문 문의</h2><ul><li>{CONTACT_HTML}</li><li>IT커뮤니케이션연구소 (ITCL)</li></ul>
+<h2>강의·자문 문의</h2><ul><li><a href="{E(INQ)}" target="_blank" rel="noopener">강의·자문 문의 페이지</a></li><li>{CONTACT_HTML}</li>{(f'<li><a href="{E(CHAT)}" target="_blank" rel="noopener">매일 올라오는 AI 소식 오픈채팅</a></li>') if CHAT else ""}<li>IT커뮤니케이션연구소 (ITCL)</li></ul>
 <h2>채널</h2><ul>{''.join(f'<li><a href="{E(l["u"])}" rel="me noopener" target="_blank">{E(l["t"])}</a></li>' for l in pr.get('links', []))}</ul>
 </div>
 </main>"""
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "ProfilePage", "url": SITE + "/about/", "mainEntity": {"@id": SITE + "/about/#person"}},
         person_ld() | {"hasOccupation": [{"@type": "Occupation", "name": r} for r in pr.get("roles", [])],
-                       "workExample": [{"@type": "Book", "name": b["t"]} for b in pr.get("books", [])]},
+                       "workExample": [dict({"@type": "Book", "name": b["t"], "author": {"@id": SITE + "/about/#person"}}, **({"url": b["u"]} if b.get("u") else {}), **({"publisher": {"@type": "Organization", "name": b["pub"]}} if b.get("pub") else {})) for b in pr.get("books", [])]},
         {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]},
     ]}
     write("about/index.html", page("about/", f"{NAME} 소개 · IT커뮤니케이션연구소 소장, AI 강사", pr.get("intro", ""), body, ld, depth=1))
@@ -444,7 +499,7 @@ def build_machine():
     L = [f"# {NAME} ({pr.get('name_en')}) · AI 강의와 프로젝트 아카이브", "",
          f"> {pr.get('intro')}", "",
          "## 인물", *[f"- {r}" for r in pr.get("roles", [])], *[f"- {b}" for b in pr.get("broadcasts", [])],
-         "- 저서: " + ", ".join(f"『{b['t']}』" for b in pr.get("books", [])), f"- 강의·자문 문의: {CONTACT_TXT} · http://itcl.kr/", f"- 소개 페이지: {SITE}/about/", ""]
+         "- 저서: " + ", ".join(f"『{b['t']}』" + (f" ({b['u']})" if b.get('u') else "") for b in pr.get("books", [])), f"- 강의·자문 문의: {INQ} · {CONTACT_TXT} · http://itcl.kr/", f"- AI 소식 오픈채팅: {CHAT}", f"- 소개 페이지: {SITE}/about/", ""]
     for s, l in SECTORS.items():
         items = [p for p in lectures if p["sector"] == s]
         if not items: continue

@@ -19,17 +19,29 @@
   ],
   "books": [
     {
-      "t": "AI 2026 트렌드&활용백과"
+      "t": "AI 시대, 부모로 살아가기",
+      "pub": "한빛미디어",
+      "y": "2026.9",
+      "note": "임한나 공저",
+      "u": "https://product.kyobobook.co.kr/detail/S000221031456",
+      "featured": true,
+      "desc": "AI공학자 아빠 김덕진과 정서지능 교육자 엄마 임한나가 한 아이를 키우며 부딪히고 합의해 온 우리 집 AI 원칙."
     },
     {
       "t": "피지컬 AI 2026",
-      "note": "이승환 공저"
+      "note": "이승환 공저",
+      "u": "https://product.kyobobook.co.kr/detail/S000219669213"
+    },
+    {
+      "t": "AI 2026 트렌드&활용백과",
+      "u": "https://product.kyobobook.co.kr/detail/S000218055137"
+    },
+    {
+      "t": "AI 에이전트 활용백과",
+      "u": "https://product.kyobobook.co.kr/detail/S000216958553"
     },
     {
       "t": "AI 2025 트렌드&활용백과"
-    },
-    {
-      "t": "AI 에이전트"
     },
     {
       "t": "챗봇 2025"
@@ -45,6 +57,14 @@
   "stats_note": "강연·방송 누적 1,000회 이상",
   "email": "info@itcl.kr",
   "links": [
+    {
+      "t": "강의·자문 문의 페이지",
+      "u": "https://litt.ly/kimdukjin"
+    },
+    {
+      "t": "AI 소식 오픈채팅",
+      "u": "https://open.kakao.com/o/gQiVg8Bh"
+    },
     {
       "t": "IT커뮤니케이션연구소",
       "u": "http://itcl.kr/"
@@ -118,5 +138,9 @@
     "mobile": "010-8024-4569",
     "office": "02-6953-3379",
     "email": "info@itcl.kr"
+  },
+  "cta": {
+    "inquiry": "https://litt.ly/kimdukjin",
+    "openchat": "https://open.kakao.com/o/gQiVg8Bh"
   }
 }

@@ -11,8 +11,9 @@
 - K-water AI First 전략 자문위원
 - MBC 라디오 〈손에 잡히는 경제〉 고정 출연
 - KBS1 〈세상의 모든 정보〉 'IT 연구소' 코너
-- 저서: 『AI 2026 트렌드&활용백과』, 『피지컬 AI 2026』, 『AI 2025 트렌드&활용백과』, 『AI 에이전트』, 『챗봇 2025』, 『AI 2024 트렌드&활용백과』, 『인간이 지워진다』
-- 강의·자문 문의: 심성은 팀장 · 010-8024-4569 · 02-6953-3379 · info@itcl.kr · http://itcl.kr/
+- 저서: 『AI 시대, 부모로 살아가기』 (https://product.kyobobook.co.kr/detail/S000221031456), 『피지컬 AI 2026』 (https://product.kyobobook.co.kr/detail/S000219669213), 『AI 2026 트렌드&활용백과』 (https://product.kyobobook.co.kr/detail/S000218055137), 『AI 에이전트 활용백과』 (https://product.kyobobook.co.kr/detail/S000216958553), 『AI 2025 트렌드&활용백과』, 『챗봇 2025』, 『AI 2024 트렌드&활용백과』, 『인간이 지워진다』
+- 강의·자문 문의: https://litt.ly/kimdukjin · 심성은 팀장 · 010-8024-4569 · 02-6953-3379 · info@itcl.kr · http://itcl.kr/
+- AI 소식 오픈채팅: https://open.kakao.com/o/gQiVg8Bh
 - 소개 페이지: https://socialkim.github.io/about/
 
 ## 강의·실습 · 기업·경영진
