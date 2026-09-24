@@ -61,6 +61,20 @@
 - AI 안전 경쟁을 죄수의 딜레마로 풀어, 협약 범위와 감시 강도 같은 룰을 바꾸면 기업별 유인이 어떻게 달라지는지 보여 주는 스튜디오입니다. 리더 발언 분석, EPS·PER 계산기, 방송용 그래픽을 함께 제공합니다.
 - 주제: AI 안전, 게임이론, 방송 그래픽
 
+## 패브릭토리 · 마음 자막 극장: FabricTory 스토리랩
+- 상세: https://socialkim.github.io/p/fabrictory-story-lab/
+- 원본: https://fabrictory-story-lab.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 만들어 2026년 9월 12일에 공개한 서비스·도구입니다.
+- 아이의 짧은 말 뒤에 있는 마음을 자막처럼 켜 보는 패브릭토리 이야기 캠페인입니다. 부모와 아이가 이어 가는 3분 대화 카드와 15초 광고를 담았습니다.
+- 주제: 브랜드 캠페인, 감성지능, 부모와 아이
+
+## 북토크에서 우리 집으로: AI 시대, 부모로 살아가기
+- 상세: https://socialkim.github.io/p/ai-parent-lab/
+- 원본: https://ai-parent-lab.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 9월 12일 북토크 'AI 시대, 부모로 살아가기'에서 부모와 아이가 함께 쓰도록 만든 체험 페이지입니다.
+- 김덕진·임한나 북토크 현장에서 만들고 집으로 가져가는 가족 체험 키트입니다. 우리 집 약속 카드, 낙서로 캐릭터 만들기, 함께 잇는 동화, 질문 뒤집기, 규칙을 정해 만드는 게임까지 담았습니다.
+- 주제: 부모 교육, 북토크, 아이와 함께
+
 ## 서울시립대학교 · 2주차 프롬프트 데스크: 범용 AI 도구의 이해 (1)
 - 상세: https://socialkim.github.io/p/uos260911/
 - 원본: https://socialkim.github.io/uos260911/
@@ -68,6 +82,36 @@
 - AI실무활용과 스마트비즈니스 2주차 수업 페이지입니다. 강의안의 프롬프트를 모두 모으고, 사용자 지정 지침 조립기로 ChatGPT와 제미나이를 제대로 설정합니다.
 - 도구: ChatGPT, Gemini
 - 주제: 대학 수업, 사용자 지정 지침
+
+## 솔빛농장 방송판: 안대표와 이프로
+- 상세: https://socialkim.github.io/p/solbit-farm-show/
+- 원본: https://solbit-farm-show.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 2026년 9월 10일에 공개한 실험 프로젝트입니다.
+- 솔빛농장에 방송 출연자를 캐릭터로 만든 두더지 손님이 찾아오는 언더스탠딩 방송판입니다. 농사부터 판매와 업그레이드까지 자동으로 운영하는 방송 모드가 있습니다.
+- 주제: 게임, 방송
+
+## 솔빛농장: 오늘부터 대농부
+- 상세: https://socialkim.github.io/p/solbit-farm/
+- 원본: https://solbit-farm.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 2026년 9월 10일에 공개한 실험 프로젝트입니다.
+- 씨앗을 심고 두더지를 쫓고 수확한 작물로 집과 농장을 키우는 브라우저 농장 게임입니다. 언더스탠딩 유튜브 방송에서 AI로 게임을 만드는 과정을 보여 주려고 만들었습니다.
+- 주제: 게임, 농장
+
+## 점심예보
+- 상세: https://socialkim.github.io/p/lunch-weather-club/
+- 원본: https://lunch-weather-club.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 만들어 2026년 9월 10일에 공개한 서비스·도구입니다.
+- 현재 위치의 날씨와 취향, 예산으로 오늘 점심 메뉴를 고르고 주변 식당을 찾아 주는 웹앱입니다. 언더스탠딩 유튜브 방송에서 시연하려고 만들었고, 같은 아이디어를 Claude로 만든 '오늘 뭐 먹지'와 비교해 볼 수 있습니다.
+- 도구: 날씨 API, 지도
+- 주제: 생활 도구
+
+## 재난문자 상황판
+- 상세: https://socialkim.github.io/p/korea-disaster-message-dashboard/
+- 원본: https://korea-disaster-message-dashboard.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 만들어 2026년 9월 8일에 공개한 서비스·도구입니다.
+- 행정안전부 재난문자를 지도 위에 지역, 재난 유형, 긴급도별로 보여 주는 대한민국 재난 상황 대시보드입니다. 광진구청 AI 명사특강 날 공공데이터 활용 예시로 만들었습니다.
+- 도구: 공공데이터, 지도
+- 주제: 재난 안전, 공공데이터
 
 ## 광진구청 · 광진 시그널: 묻는 AI에서 일하는 AI로
 - 상세: https://socialkim.github.io/p/gwangjin-signal/
@@ -83,6 +127,14 @@
 - 광진구청 AI 명사특강 실습 페이지입니다. 생활 민원 질문, 사진 찍고 물어보기처럼 스마트폰 마이크 버튼만으로 해 보는 실습과 안전 가이드를 담았습니다.
 - 도구: ChatGPT, Gemini, Claude
 - 주제: 지자체, 음성 입력, AI 리터러시
+
+## 광진 3D: 한강에서 아차산까지
+- 상세: https://socialkim.github.io/p/gwangjin-3d-map/
+- 원본: https://gwangjin-3d-map.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 만들어 2026년 9월 8일에 공개한 서비스·도구입니다.
+- OpenStreetMap의 건물 윤곽과 도로에 실제 지형 고도 데이터를 결합해 광진구를 3D로 둘러보는 지도입니다. 광진구청 AI 명사특강 날 만들었고, 건물마다 높이의 근거를 확인할 수 있습니다.
+- 도구: OpenStreetMap, 3D 지도
+- 주제: 지역 데이터, 3D
 
 ## 범농협 · 리더의 AI 사용법, 직접 따라 하기 · 1차
 - 상세: https://socialkim.github.io/p/nh_main1/
@@ -524,44 +576,6 @@
 - 도구: ChatGPT
 - 주제: 카페, 주문 시스템, AI 추천
 
-## 솔빛농장 방송판: 안대표와 이프로
-- 상세: https://socialkim.github.io/p/solbit-farm-show/
-- 원본: https://solbit-farm-show.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 공개한 실험 프로젝트입니다. 방송사·출연진과 관계없는 팬메이드 창작물입니다.
-- 솔빛농장에 방송 출연자를 캐릭터로 만든 두더지 손님이 찾아오는 방송판입니다. 농사부터 판매와 업그레이드까지 자동으로 운영하는 방송 모드가 있습니다.
-- 주제: 게임, 방송
-
-## 솔빛농장: 오늘부터 대농부
-- 상세: https://socialkim.github.io/p/solbit-farm/
-- 원본: https://solbit-farm.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 공개한 실험 프로젝트입니다.
-- 씨앗을 심고 두더지를 쫓고 수확한 작물로 집과 농장을 키우는 브라우저 농장 게임입니다. 진행 상황은 기기에 자동 저장됩니다.
-- 주제: 게임, 농장
-
-## 점심예보
-- 상세: https://socialkim.github.io/p/lunch-weather-club/
-- 원본: https://lunch-weather-club.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 만들어 공개한 서비스·도구입니다.
-- 현재 위치의 날씨와 취향, 예산으로 오늘 점심 메뉴를 고르고 주변 식당을 찾아 주는 웹앱입니다. 같은 아이디어를 Claude로 만든 '오늘 뭐 먹지'와 비교해 볼 수 있습니다.
-- 도구: 날씨 API, 지도
-- 주제: 생활 도구
-
-## 재난문자 상황판
-- 상세: https://socialkim.github.io/p/korea-disaster-message-dashboard/
-- 원본: https://korea-disaster-message-dashboard.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 만들어 공개한 서비스·도구입니다.
-- 행정안전부 재난문자를 지도 위에 지역, 재난 유형, 긴급도별로 보여 주는 대한민국 재난 상황 대시보드입니다. 최신 문자와 원문 링크를 함께 확인할 수 있습니다.
-- 도구: 공공데이터, 지도
-- 주제: 재난 안전, 공공데이터
-
-## 광진 3D: 한강에서 아차산까지
-- 상세: https://socialkim.github.io/p/gwangjin-3d-map/
-- 원본: https://gwangjin-3d-map.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 만들어 공개한 서비스·도구입니다.
-- OpenStreetMap의 건물 윤곽과 도로에 실제 지형 고도 데이터를 결합해 광진구를 3D로 둘러보는 지도입니다. 건물마다 높이의 근거를 확인할 수 있습니다.
-- 도구: OpenStreetMap, 3D 지도
-- 주제: 지역 데이터, 3D
-
 ## 패브릭토리 · FABRITORY 상하이 리서치 투어
 - 상세: https://socialkim.github.io/p/fabritory-shanghai-research/
 - 원본: https://fabritory-shanghai-research.socialkim.chatgpt.site/
@@ -569,23 +583,9 @@
 - 상하이의 브랜드, 리테일, 공간, 도시재생을 현장에서 관찰하고 매일의 관찰을 내 사업의 질문과 실행안으로 바꾸는 3박 4일 필드 리서치 프로그램 사이트입니다. 참가 신청과 참가자 로그인 기능을 갖췄습니다.
 - 주제: 브랜드 리서치, 상하이, 프로그램 사이트
 
-## 패브릭토리 · 마음 자막 극장: FabricTory 스토리랩
-- 상세: https://socialkim.github.io/p/fabrictory-story-lab/
-- 원본: https://fabrictory-story-lab.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 만들어 공개한 서비스·도구입니다.
-- 아이의 짧은 말 뒤에 있는 마음을 자막처럼 켜 보는 패브릭토리 이야기 캠페인입니다. 부모와 아이가 이어 가는 3분 대화 카드와 15초 광고를 담았습니다.
-- 주제: 브랜드 캠페인, 감성지능, 부모와 아이
-
 ## 최욱 무적 풋살: 매불 아레나
 - 상세: https://socialkim.github.io/p/choi-wook-futsal/
 - 원본: https://choi-wook-futsal.socialkim.chatgpt.site/
 - IT커뮤니케이션연구소 김덕진 소장이 AI로 만들어 공개한 실험 프로젝트입니다. 방송사·출연진과 관계없는 팬메이드 창작물입니다.
 - 어떤 슛도 골이 되는 3D 풋살 패러디 게임입니다. 직접 뛰거나 자동 중계로 볼 수 있습니다.
 - 주제: 게임
-
-## 북토크에서 우리 집으로: AI 시대, 부모로 살아가기
-- 상세: https://socialkim.github.io/p/ai-parent-lab/
-- 원본: https://ai-parent-lab.socialkim.chatgpt.site/
-- IT커뮤니케이션연구소 김덕진 소장이 북토크 'AI 시대, 부모로 살아가기'에서 부모와 아이가 함께 쓰도록 만든 체험 페이지입니다.
-- 김덕진·임한나 북토크 현장에서 만들고 집으로 가져가는 가족 체험 키트입니다. 우리 집 약속 카드, 낙서로 캐릭터 만들기, 함께 잇는 동화, 질문 뒤집기, 규칙을 정해 만드는 게임까지 담았습니다.
-- 주제: 부모 교육, 북토크, 아이와 함께
