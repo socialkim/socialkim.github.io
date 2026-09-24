@@ -8,6 +8,14 @@
 - 도구: ChatGPT
 - 주제: 업무 자동화, 데이터 분석, 보안 설정
 
+## 상상이 움직이기까지: 아빠와 아들의 AI 창작 기록
+- 상세: https://socialkim.github.io/p/suchan-imagination-to-reality/
+- 원본: https://suchan-imagination-to-reality.socialkim.chatgpt.site/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 9월 24일 초등학생 아들과 함께 상상 속 게임 캐릭터를 AI로 그림과 영상까지 만든 과정을 기록한 페이지입니다.
+- 초등학생 아들이 길을 걷다 떠올린 게임 캐릭터를 음성으로 설명하고, ChatGPT 그림 그리기로 캐릭터와 공격 동작을 그린 뒤 GPT Work로 리듬게임 영상까지 만든 과정을 기록한 페이지입니다. 실제 음성 프롬프트와 대화 캡처, 32초·64초 완성 영상을 함께 볼 수 있습니다.
+- 도구: ChatGPT 그림 그리기, GPT Work
+- 주제: 아이와 함께, AI 창작, 음성 프롬프트
+
 ## 세종사이버대학교 · 챗GPT 따라하기, 생성형AI와 스마트복지
 - 상세: https://socialkim.github.io/p/sjcu_practice/
 - 원본: https://socialkim.github.io/sjcu_practice/
