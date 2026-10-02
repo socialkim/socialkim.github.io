@@ -1,5 +1,17 @@
 # 김덕진 · 전체 자료 상세
 
+## 서울시립대 수업
+- 상세: https://socialkim.github.io/p/uos/
+- 원본: https://socialkim.github.io/uos/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 2일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 서울시립대 김덕진 교수 수업 모음 — 학기별 수업 포털
+
+## AI에게 정확히 말하는 200개의 단어
+- 상세: https://socialkim.github.io/p/mis200/
+- 원본: https://socialkim.github.io/mis200/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 2일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 상황이 오면 바로 떠오르는 200개의 단어. 바이브 코딩·에이전틱 엔지니어링 시대, AI에게 정확히 말하기 위한 MIS 용어집 웹북.
+
 ## 코윈테크 · AI, 내 업무에 이렇게 써봅니다
 - 상세: https://socialkim.github.io/p/cowin/
 - 원본: https://socialkim.github.io/cowin/
