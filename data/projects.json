@@ -561,7 +561,13 @@
    "대학 수업",
    "도구 선택"
   ],
-  "status": "curated"
+  "status": "curated",
+  "extra": [
+   {
+    "t": "2026년 2학기 수업 포털",
+    "u": "https://socialkim.github.io/uos/"
+   }
+  ]
  },
  {
   "id": "uos260911",
@@ -582,7 +588,13 @@
    "대학 수업",
    "사용자 지정 지침"
   ],
-  "status": "curated"
+  "status": "curated",
+  "extra": [
+   {
+    "t": "2026년 2학기 수업 포털",
+    "u": "https://socialkim.github.io/uos/"
+   }
+  ]
  },
  {
   "id": "dit",
@@ -1719,5 +1731,67 @@
    }
   ],
   "claim": "IT커뮤니케이션연구소 김덕진 소장이 2026년 9월 24일 초등학생 아들이 상상한 캐릭터와 규칙으로 ChatGPT와 함께 하루 만에 만든 리듬 게임입니다."
+ },
+ {
+  "id": "uos",
+  "url": "https://socialkim.github.io/uos/",
+  "repo": "socialkim/uos",
+  "section": "lecture",
+  "sector": "univ",
+  "org": "서울시립대학교",
+  "audience": "경영학부 학생",
+  "title": "AI실무활용과 스마트비즈니스 수업 포털 (2026년 2학기)",
+  "summary": "서울시립대 경영학부 2026년 2학기 수업 포털입니다. AI를 알다, AI와 대화하다, AI로 만들다, 팀 프로젝트의 네 단계 16주 계획과 주차별 실습 페이지, 패들렛을 한곳에서 봅니다.",
+  "date": "2026-10-02",
+  "tools": [
+   "ChatGPT",
+   "Gemini",
+   "Claude"
+  ],
+  "topics": [
+   "대학 수업",
+   "프롬프트 엔지니어링",
+   "바이브 코딩",
+   "팀 프로젝트"
+  ],
+  "status": "curated",
+  "extra": [
+   {
+    "t": "2주차 프롬프트 데스크",
+    "u": "https://socialkim.github.io/uos260911/"
+   },
+   {
+    "t": "3주차 도구 데스크",
+    "u": "https://socialkim.github.io/uos260918/"
+   },
+   {
+    "t": "AI 협업 용어 200선 교재",
+    "u": "https://socialkim.github.io/mis200/"
+   }
+  ],
+  "claim": "IT커뮤니케이션연구소 김덕진 소장이 서울시립대학교 경영학부 'AI실무활용과 스마트비즈니스'(2026년 2학기, 김아람 공동 강의)를 위해 만든 학기 수업 포털입니다."
+ },
+ {
+  "id": "mis200",
+  "url": "https://socialkim.github.io/mis200/",
+  "repo": "socialkim/mis200",
+  "section": "lecture",
+  "sector": "univ",
+  "org": "서울시립대학교",
+  "audience": "경영학부 학생",
+  "title": "AI에게 정확히 말하는 200개의 단어: AI 협업 용어 200선",
+  "summary": "바이브 코딩, 에이전트에게 일 맡기기, 결과 검증까지 AI와 일할 때 필요한 용어 200개를 '언제 쓰는가' 기준 12개 상황으로 묶은 웹북입니다. 66쪽 책으로 읽고, 용어를 검색하고 체크하며, 객관식 연습과 오답노트로 익힙니다.",
+  "date": "2026-10-02",
+  "tools": [
+   "웹북"
+  ],
+  "topics": [
+   "MIS 용어",
+   "에이전틱 엔지니어링",
+   "바이브 코딩",
+   "교재"
+  ],
+  "status": "curated",
+  "claim": "IT커뮤니케이션연구소 김덕진 소장이 서울시립대학교 'AI실무활용과 스마트비즈니스' 2026년 2학기 교재로 쓴 AI 협업 용어집 웹북입니다."
  }
 ]
