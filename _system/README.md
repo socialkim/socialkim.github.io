@@ -22,6 +22,10 @@
 - 소개 문구 바꾸기: profile.json 수정 후 build.
 - 수동으로 돌리기: GitHub > Actions > update-hub > Run workflow.
 
+## 올리기(push)
+- 소장님 PC의 `C:\Users\kimdu\claude\socialkim\허브_올리기.bat`을 더블클릭하면 최신 내용 받기(pull --rebase) → 올리기(push)를 한 번에 한다.
+- 멈추면 화면을 캡처해 클로드에게 보여 준다.
+
 ## 주의
 - Actions가 매일 커밋하므로, PC에서 작업하기 전에 `git pull`을 먼저 한다.
 - 기준 문서: `01_브리프.md` → `02_계획서.md` → `03_가이드라인.md`.
