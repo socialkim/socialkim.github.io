@@ -1,5 +1,37 @@
 [
  {
+  "id": "uos-ai-workbook",
+  "url": "https://socialkim.github.io/uos-ai-workbook/",
+  "repo": "socialkim/uos-ai-workbook",
+  "section": "new",
+  "sector": "",
+  "org": "",
+  "audience": "",
+  "title": "AI에게 일 시키는 법, 지금 바로 해보기",
+  "summary": "서울시립대 AICOSS 월간 AI 특강 실습 워크북. 프롬프트 6단계 빌더와 내 전공 × AI 한 줄 작성.",
+  "date": "2026-10-06",
+  "tools": [],
+  "topics": [],
+  "status": "auto",
+  "page_title": "AI 시대, 당신의 전공은 무엇이 되는가 · 실습 워크북"
+ },
+ {
+  "id": "hr_aifesta",
+  "url": "https://socialkim.github.io/hr_aifesta/",
+  "repo": "socialkim/hr_aifesta",
+  "section": "new",
+  "sector": "",
+  "org": "",
+  "audience": "",
+  "title": "에이전트 보스의 시대",
+  "summary": "김덕진 ITCL 소장 기조연설 복기 페이지. AX 전환기, 산업 인재를 다시 설계하는 HRD.",
+  "date": "2026-10-06",
+  "tools": [],
+  "topics": [],
+  "status": "auto",
+  "page_title": "에이전트 보스의 시대 | 2026 AI 융합산업 HRD 포럼 복기"
+ },
+ {
   "id": "dukjin-ai-chronicle",
   "url": "https://socialkim.github.io/dukjin-ai-chronicle/",
   "repo": "socialkim/dukjin-ai-chronicle",
