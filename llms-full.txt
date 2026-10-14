@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 아이의 말이 그림·게임·영상이 되는 25분
+- 상세: https://socialkim.github.io/p/ai_parents/
+- 원본: https://socialkim.github.io/ai_parents/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 13일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 아이가 말하고, 보고, 다시 말하면 그림·게임·영상이 됩니다. 『AI 시대, 부모로 살아가기』 북토크 현장 실습 페이지.
+
 ## AI에게 일 시키는 법, 지금 바로 해보기
 - 상세: https://socialkim.github.io/p/uos-ai-workbook/
 - 원본: https://socialkim.github.io/uos-ai-workbook/

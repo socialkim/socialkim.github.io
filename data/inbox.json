@@ -1,5 +1,21 @@
 [
  {
+  "id": "ai_parents",
+  "url": "https://socialkim.github.io/ai_parents/",
+  "repo": "socialkim/ai_parents",
+  "section": "new",
+  "sector": "",
+  "org": "",
+  "audience": "",
+  "title": "아이의 말이 그림·게임·영상이 되는 25분",
+  "summary": "아이가 말하고, 보고, 다시 말하면 그림·게임·영상이 됩니다. 『AI 시대, 부모로 살아가기』 북토크 현장 실습 페이지.",
+  "date": "2026-10-13",
+  "tools": [],
+  "topics": [],
+  "status": "auto",
+  "page_title": "말로 만드는 AI 놀이 | AI 시대, 부모로 살아가기 북토크"
+ },
+ {
   "id": "uos-ai-workbook",
   "url": "https://socialkim.github.io/uos-ai-workbook/",
   "repo": "socialkim/uos-ai-workbook",
