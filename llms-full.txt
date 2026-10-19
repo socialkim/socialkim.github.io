@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 생성형 AI는 우리에게 무엇을 이야기하는가?
+- 상세: https://socialkim.github.io/p/minerva1019/
+- 원본: https://socialkim.github.io/minerva1019/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 18일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 삼성생명 미네르바 세미나(2026.10.19) 실습과 지점 사무 AI 활용 프롬프트 모음
+
 ## 아이의 말이 그림·게임·영상이 되는 25분
 - 상세: https://socialkim.github.io/p/ai_parents/
 - 원본: https://socialkim.github.io/ai_parents/

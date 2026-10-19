@@ -1,5 +1,21 @@
 [
  {
+  "id": "minerva1019",
+  "url": "https://socialkim.github.io/minerva1019/",
+  "repo": "socialkim/minerva1019",
+  "section": "new",
+  "sector": "",
+  "org": "",
+  "audience": "",
+  "title": "생성형 AI는 우리에게 무엇을 이야기하는가?",
+  "summary": "삼성생명 미네르바 세미나(2026.10.19) 실습과 지점 사무 AI 활용 프롬프트 모음",
+  "date": "2026-10-18",
+  "tools": [],
+  "topics": [],
+  "status": "auto",
+  "page_title": "미네르바 세미나 실습 페이지"
+ },
+ {
   "id": "ai_parents",
   "url": "https://socialkim.github.io/ai_parents/",
   "repo": "socialkim/ai_parents",
