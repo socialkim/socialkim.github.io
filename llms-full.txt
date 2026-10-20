@@ -1,5 +1,17 @@
 # 김덕진 · 전체 자료 상세
 
+## 인공지능(AI)과 놀아보자!
+- 상세: https://socialkim.github.io/p/mokmin/
+- 원본: https://socialkim.github.io/mokmin/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 19일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 강서 목민관학교 18기 AI 실습 페이지. 무료 챗GPT로 말 걸고, 그리고, 쓰고, 노래하고, 만들어 봅니다.
+
+## AI 2027 독자 실습실
+- 상세: https://socialkim.github.io/p/ai2027/
+- 원본: https://socialkim.github.io/ai2027/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 19일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 『AI 2027 트렌드&활용백과』 독자를 위한 실습 페이지.
+
 ## 생성형 AI는 우리에게 무엇을 이야기하는가?
 - 상세: https://socialkim.github.io/p/minerva1019/
 - 원본: https://socialkim.github.io/minerva1019/
