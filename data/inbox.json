@@ -1,5 +1,21 @@
 [
  {
+  "id": "ulsan_parents",
+  "url": "https://socialkim.github.io/ulsan_parents/",
+  "repo": "socialkim/ulsan_parents",
+  "section": "new",
+  "sector": "",
+  "org": "",
+  "audience": "",
+  "title": "부모가 먼저 해 보는 AI 20분",
+  "summary": "울산 AI디지털배움터 김덕진 강연 실습 페이지. 답 대신 질문하는 AI, 말로 만드는 AI 놀이, 안전 설정, 우리 집 약속.",
+  "date": "2026-10-21",
+  "tools": [],
+  "topics": [],
+  "status": "auto",
+  "page_title": "부모가 먼저 해 보는 AI | AI 시대, 부모로 살아가기 · 울산"
+ },
+ {
   "id": "ai2027",
   "url": "https://socialkim.github.io/ai2027/",
   "repo": "socialkim/ai2027",

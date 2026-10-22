@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 부모가 먼저 해 보는 AI 20분
+- 상세: https://socialkim.github.io/p/ulsan_parents/
+- 원본: https://socialkim.github.io/ulsan_parents/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 21일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 울산 AI디지털배움터 김덕진 강연 실습 페이지. 답 대신 질문하는 AI, 말로 만드는 AI 놀이, 안전 설정, 우리 집 약속.
+
 ## 인공지능(AI)과 놀아보자!
 - 상세: https://socialkim.github.io/p/mokmin/
 - 원본: https://socialkim.github.io/mokmin/
