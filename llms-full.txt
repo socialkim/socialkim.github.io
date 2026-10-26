@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## AI 잘 쓰는 옆집 사장님의 비밀 전략 A to Z · 실습장
+- 상세: https://socialkim.github.io/p/sajang/
+- 원본: https://socialkim.github.io/sajang/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 26일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 2026 서울신용보증재단 소상공인 공개강좌 · AI 잘 쓰는 옆집 사장님의 비밀 전략 A to Z 실습 페이지
+
 ## 부모가 먼저 해 보는 AI 20분
 - 상세: https://socialkim.github.io/p/ulsan_parents/
 - 원본: https://socialkim.github.io/ulsan_parents/
