@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 맡겨 본 만큼 보이는 2027년
+- 상세: https://socialkim.github.io/p/ai2027-preview/
+- 원본: https://socialkim.github.io/ai2027-preview/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 10월 28일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 『AI 2027 트렌드&활용백과』 저자 김덕진 소장의 2026.10.28 교보문고 강연 자료 121장을 웹북으로 넘겨 보세요. 2027년 AI 트렌드 10과 활용편 미리보기.
+
 ## AI 잘 쓰는 옆집 사장님의 비밀 전략 A to Z · 실습장
 - 상세: https://socialkim.github.io/p/sajang/
 - 원본: https://socialkim.github.io/sajang/

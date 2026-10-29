@@ -113,6 +113,7 @@
 - [보프의 리듬 원정대](https://socialkim.github.io/p/suchan-rhythm-quest/): 초등학생 아들이 상상한 리듬 배틀을 실제로 플레이할 수 있게 만든 브라우저 음악 게임입니다. 다섯 라이벌에게 쉬움부터 어려움까지 도전할 수 있고, 키보드와 터치로 즐깁니다. 아이의 한마디에서 하루 만에 게임이 되기까지의 제작 기록과 이어집니다.
 
 ## 정리 전 자료
+- [맡겨 본 만큼 보이는 2027년](https://socialkim.github.io/ai2027-preview/): 2026-10-28
 - [AI 잘 쓰는 옆집 사장님의 비밀 전략 A to Z · 실습장](https://socialkim.github.io/sajang/): 2026-10-26
 - [부모가 먼저 해 보는 AI 20분](https://socialkim.github.io/ulsan_parents/): 2026-10-21
 - [AI 2027 독자 실습실](https://socialkim.github.io/ai2027/): 2026-10-19
