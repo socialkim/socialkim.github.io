@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 현황은 AI에게 맡기고, 고삐는 부장이 쥔다
+- 상세: https://socialkim.github.io/p/nh_bujang/
+- 원본: https://socialkim.github.io/nh_bujang/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 11월 3일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 범농협 부실장 AI 아카데미 · 실습 가이드
+
 ## 맡겨 본 만큼 보이는 2027년
 - 상세: https://socialkim.github.io/p/ai2027-preview/
 - 원본: https://socialkim.github.io/ai2027-preview/
