@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 생성형AI는 설계사에게 무엇을 이야기하는가?
+- 상세: https://socialkim.github.io/p/rc1104/
+- 원본: https://socialkim.github.io/rc1104/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 11월 4일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 삼성화재 설계사 특강(2026.11.04) 강의 시연과 상담 준비 AI 활용 프롬프트 모음
+
 ## 현황은 AI에게 맡기고, 고삐는 부장이 쥔다
 - 상세: https://socialkim.github.io/p/nh_bujang/
 - 원본: https://socialkim.github.io/nh_bujang/
