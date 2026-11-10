@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## 부장의 AI 사용법: 분석하고, 묻게 하고, 쓰게 한다
+- 상세: https://socialkim.github.io/p/nh_bujang2_adv/
+- 원본: https://socialkim.github.io/nh_bujang2_adv/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 11월 9일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 범농협 부실장 AI 아카데미 2교시 · 실무 실습
+
 ## 생성형AI는 설계사에게 무엇을 이야기하는가?
 - 상세: https://socialkim.github.io/p/rc1104/
 - 원본: https://socialkim.github.io/rc1104/
