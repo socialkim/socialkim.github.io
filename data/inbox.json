@@ -1,5 +1,21 @@
 [
  {
+  "id": "cw",
+  "url": "https://socialkim.github.io/cw/",
+  "repo": "socialkim/cw",
+  "section": "new",
+  "sector": "",
+  "org": "",
+  "audience": "",
+  "title": "AI시대의 생존법: 알아두면 쓸모 있는 AI",
+  "summary": "경남 AI디지털배움터 창원대(2026.11.18) AI시대의 생존법 복습 페이지",
+  "date": "2026-11-18",
+  "tools": [],
+  "topics": [],
+  "status": "auto",
+  "page_title": "AI시대의 생존법 복습 · 경남 AI디지털배움터 창원대"
+ },
+ {
   "id": "eta_coteacher",
   "url": "https://socialkim.github.io/eta_coteacher/",
   "repo": "socialkim/eta_coteacher",
