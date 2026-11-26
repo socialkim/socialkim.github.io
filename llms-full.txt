@@ -1,5 +1,11 @@
 # 김덕진 · 전체 자료 상세
 
+## AI가 동료가 되는 시대
+- 상세: https://socialkim.github.io/p/gne/
+- 원본: https://socialkim.github.io/gne/
+- IT커뮤니케이션연구소 김덕진 소장이 2026년 11월 25일 GitHub에 공개한 페이지입니다. 분류와 설명은 곧 정리됩니다.
+- 2026.11.26 경남교육청 교육연수원 행복특강 「AI가 동료가 되는 시대」 복습 페이지
+
 ## AI시대의 생존법: 알아두면 쓸모 있는 AI
 - 상세: https://socialkim.github.io/p/cw/
 - 원본: https://socialkim.github.io/cw/
